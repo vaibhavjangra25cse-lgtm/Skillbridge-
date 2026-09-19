@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create your SkillBridge account. Join the peer-to-peer student skill exchange community and start learning today.">
+    <title>Create Account - SkillBridge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <nav class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">SB</div>
+                <div>
+                    <span class="logo-text">SkillBridge</span>
+                    <span class="logo-tagline">Peer-to-Peer Learning</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explore.html">Explore Skills</a></li>
+                <li><a href="mentors.html">Find Mentors</a></li>
+                <li><a href="requests.html">Requests</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="btn-signin">Sign In</a>
+                <a href="signup.html" class="btn btn-primary btn-sm active">Join Now</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Sign Up Section -->
+        <section class="signup-section">
+            <div class="signup-card">
+
+                <!-- Branding inside card -->
+                <div class="signup-brand">
+                    <div class="logo-icon">SB</div>
+                    <span class="brand-text">SkillBridge</span>
+                </div>
+
+                <h1 class="signup-title">Join SkillBridge</h1>
+                <p class="signup-subtitle">Start learning and sharing your skills with fellow students.</p>
+
+                <form action="index.html" method="get">
+
+                    <!-- First Name + Last Name side by side -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="signup-firstname">First Name</label>
+                            <input type="text" id="signup-firstname" class="form-input" placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="signup-lastname">Last Name</label>
+                            <input type="text" id="signup-lastname" class="form-input" placeholder="Last name">
+                        </div>
+                    </div>
+
+                    <!-- College Email -->
+                    <div class="form-group">
+                        <label class="form-label" for="signup-email">College Email</label>
+                        <input type="email" id="signup-email" class="form-input" placeholder="you@college.edu">
+                    </div>
+
+                    <!-- Department -->
+                    <div class="form-group">
+                        <label class="form-label" for="signup-department">Department</label>
+                        <select id="signup-department" class="form-input">
+                            <option value="">Select your department</option>
+                            <option>Computer Science</option>
+                            <option>Information Technology</option>
+                            <option>Design</option>
+                            <option>Business Administration</option>
+                            <option>Mass Communication</option>
+                            <option>Foreign Languages</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Year / Semester -->
+                    <div class="form-group">
+                        <label class="form-label" for="signup-year">Year / Semester</label>
+                        <select id="signup-year" class="form-input">
+                            <option value="">Select your year</option>
+                            <option>1st Year</option>
+                            <option>2nd Year</option>
+                            <option>3rd Year</option>
+                            <option>4th Year</option>
+                            <option>Postgraduate</option>
+                        </select>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label class="form-label" for="signup-password">Password</label>
+                        <input type="password" id="signup-password" class="form-input" placeholder="Create a password">
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label class="form-label" for="signup-confirm">Confirm Password</label>
+                        <input type="password" id="signup-confirm" class="form-input" placeholder="Confirm your password">
+                    </div>
+
+                    <!-- Create Account button — navigates to home -->
+                    <a href="index.html" class="form-btn">Create Account</a>
+
+                    <p class="signup-terms">By creating an account, you agree to our Terms of Service.</p>
+
+                </form>
+
+                <!-- Link back to login -->
+                <p class="signup-footer-note">
+                    Already have an account?
+                    <a href="login.html" class="signin-link">Sign In →</a>
+                </p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="logo-icon">SB</div>
+                    <span class="logo-text">SkillBridge</span>
+                </div>
+                <p>A peer-to-peer skill exchange platform built for college students. Learn, share, and grow together.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="explore.html">Explore Skills</a>
+                    <a href="mentors.html">Find Mentors</a>
+                    <a href="requests.html">Requests</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="login.html">Sign In</a>
+                    <a href="signup.html">Create Account</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SkillBridge. All rights reserved.</p>
+            <p>Made with ❤️ for students</p>
+        </div>
+    </footer>
+
+</body>
+</html>

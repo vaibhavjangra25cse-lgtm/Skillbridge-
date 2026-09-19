@@ -1,0 +1,538 @@
+/* ================================
+   SkillBridge - Learning Requests CSS
+   Student 5 Responsibility
+   File: requests.css
+   ================================ */
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #2d3436;
+    background-color: #ffffff;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Navigation */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    background-color: #5b4cdb;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2d3436;
+}
+
+.logo-tagline {
+    display: block;
+    font-size: 11px;
+    color: #636e72;
+    margin-top: -2px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: #636e72;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #5b4cdb;
+}
+
+.nav-links a.active {
+    color: #5b4cdb;
+    font-weight: 600;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-signin {
+    font-size: 14px;
+    font-weight: 500;
+    color: #636e72;
+    transition: color 0.2s ease;
+}
+
+.btn-signin:hover {
+    color: #5b4cdb;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: #5b4cdb;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #4a3db8;
+}
+
+.btn-sm {
+    padding: 8px 18px;
+    font-size: 13px;
+}
+
+/* Container */
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Page Header */
+.page-header {
+    padding: 40px 0 10px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #2d3436;
+    margin-bottom: 6px;
+}
+
+.page-subtitle {
+    font-size: 15px;
+    color: #636e72;
+}
+
+/* Summary Cards */
+.search-filters {
+    padding: 24px 0 10px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 20px 24px;
+    text-align: center;
+}
+
+.summary-number {
+    display: block;
+    font-size: 28px;
+    font-weight: 800;
+    color: #2d3436;
+    margin-bottom: 4px;
+}
+
+.summary-label {
+    font-size: 13px;
+    color: #636e72;
+    font-weight: 500;
+}
+
+/* Filter Tab Pills */
+.tab-pills {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.tab-pill {
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1.5px solid #e9ecef;
+    color: #636e72;
+    display: inline-block;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.tab-pill:hover {
+    border-color: #5b4cdb;
+    color: #5b4cdb;
+}
+
+.tab-pill.active {
+    background-color: #5b4cdb;
+    color: white;
+    border-color: #5b4cdb;
+}
+
+/* Section */
+.section {
+    padding: 10px 0 70px;
+}
+
+/* Requests Table */
+.request-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.request-table thead {
+    background-color: #f8f9fa;
+}
+
+.request-table th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    color: #636e72;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.request-table td {
+    padding: 18px;
+    font-size: 14px;
+    color: #2d3436;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+}
+
+.request-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Partner Info in table */
+.partner-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.partner-avatar-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+
+.partner-name {
+    font-weight: 600;
+    color: #2d3436;
+    font-size: 14px;
+}
+
+.partner-dept {
+    font-size: 12px;
+    color: #636e72;
+}
+
+/* Exchange Info */
+.exchange-info {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.exchange-info .teach-link {
+    color: #5b4cdb;
+    font-weight: 600;
+}
+
+.exchange-info .learn-link {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-pending {
+    background-color: #fef3c7;
+    color: #b45309;
+}
+
+.status-confirmed {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+.status-completed {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status-declined {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Action Buttons in table */
+.action-btn {
+    display: inline-block;
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    margin-right: 6px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.action-btn.accept {
+    background-color: #16a34a;
+    color: white;
+}
+
+.action-btn.accept:hover {
+    background-color: #15803d;
+}
+
+.action-btn.chat {
+    background-color: transparent;
+    border: 1.5px solid #e9ecef;
+    color: #2d3436;
+}
+
+.action-btn.chat:hover {
+    border-color: #5b4cdb;
+    color: #5b4cdb;
+}
+
+.action-text {
+    font-size: 13px;
+    color: #636e72;
+    font-weight: 500;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.2s ease;
+}
+
+.action-text:hover {
+    color: #5b4cdb;
+}
+
+/* Footer */
+.footer {
+    background-color: #1a1a2e;
+    color: #dfe6e9;
+    padding-top: 50px;
+}
+
+.footer-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px 36px;
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.footer-brand {
+    max-width: 360px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.footer-logo .logo-icon {
+    background-color: #5b4cdb;
+}
+
+.footer-logo .logo-text {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.footer-brand p {
+    font-size: 14px;
+    color: #b2bec3;
+    line-height: 1.7;
+}
+
+.footer-links {
+    display: flex;
+    gap: 80px;
+}
+
+.footer-col h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.footer-col a {
+    display: block;
+    font-size: 14px;
+    color: #b2bec3;
+    margin-bottom: 10px;
+}
+
+.footer-col a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 20px;
+    border-top: 1px solid #2d2d4a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-bottom p {
+    font-size: 13px;
+    color: #636e8a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .request-table {
+        font-size: 12px;
+    }
+
+    .request-table th,
+    .request-table td {
+        padding: 12px 10px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-links {
+        gap: 40px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 26px;
+    }
+
+    .tab-pills {
+        flex-direction: column;
+    }
+
+    .tab-pill {
+        text-align: center;
+    }
+}

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and manage your skill exchange requests on SkillBridge. Track pending, accepted, completed, and declined requests.">
+    <title>Learning Requests - SkillBridge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="requests.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <nav class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">SB</div>
+                <div>
+                    <span class="logo-text">SkillBridge</span>
+                    <span class="logo-tagline">Peer-to-Peer Learning</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explore.html">Explore Skills</a></li>
+                <li><a href="mentors.html">Find Mentors</a></li>
+                <li><a href="requests.html" class="active">Requests</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="btn-signin">Sign In</a>
+                <a href="signup.html" class="btn btn-primary btn-sm">Join Now</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Learning Requests</h1>
+                <p class="page-subtitle">Track and manage all your skill exchange requests in one place.</p>
+            </div>
+        </section>
+
+        <!-- Summary Cards -->
+        <section class="search-filters">
+            <div class="container">
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <span class="summary-number">3</span>
+                        <span class="summary-label">Pending</span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-number">2</span>
+                        <span class="summary-label">Accepted</span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-number">4</span>
+                        <span class="summary-label">Completed</span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-number">1</span>
+                        <span class="summary-label">Declined</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Tabs -->
+        <section class="container">
+            <div class="tab-pills">
+                <a href="requests.html" class="tab-pill active">All Requests</a>
+                <span class="tab-pill">Pending</span>
+                <span class="tab-pill">Accepted</span>
+                <span class="tab-pill">Completed</span>
+                <span class="tab-pill">Declined</span>
+            </div>
+        </section>
+
+        <!-- Requests Table -->
+        <section class="section">
+            <div class="container">
+                <table class="request-table">
+                    <thead>
+                        <tr>
+                            <th>Partner</th>
+                            <th>Skill Exchange</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Pending Request 1 -->
+                        <tr>
+                            <td>
+                                <div class="partner-info">
+                                    <div class="partner-avatar-placeholder" style="background-color: #4361ee;">AM</div>
+                                    <div>
+                                        <div class="partner-name">Arjun Mehta</div>
+                                        <div class="partner-dept">Computer Science</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="exchange-info">
+                                    Teaching: <span class="teach-link">UI/UX Design</span><br>
+                                    Learning: <span class="learn-link">Python</span>
+                                </div>
+                            </td>
+                            <td>Sep 5, 2026</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>
+                                <button class="action-btn accept">Accept</button>
+                                <button class="action-btn chat">Message</button>
+                            </td>
+                        </tr>
+                        <!-- Pending Request 2 -->
+                        <tr>
+                            <td>
+                                <div class="partner-info">
+                                    <div class="partner-avatar-placeholder" style="background-color: #ec4899;">AS</div>
+                                    <div>
+                                        <div class="partner-name">Aarav Singh</div>
+                                        <div class="partner-dept">Mass Communication</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="exchange-info">
+                                    Teaching: <span class="teach-link">React</span><br>
+                                    Learning: <span class="learn-link">Photography</span>
+                                </div>
+                            </td>
+                            <td>Sep 4, 2026</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>
+                                <button class="action-btn accept">Accept</button>
+                                <button class="action-btn chat">Message</button>
+                            </td>
+                        </tr>
+                        <!-- Pending Request 3 -->
+                        <tr>
+                            <td>
+                                <div class="partner-info">
+                                    <div class="partner-avatar-placeholder" style="background-color: #0ea5e9;">MP</div>
+                                    <div>
+                                        <div class="partner-name">Meera Patel</div>
+                                        <div class="partner-dept">Foreign Languages</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="exchange-info">
+                                    Teaching: <span class="teach-link">Web Development</span><br>
+                                    Learning: <span class="learn-link">Spanish</span>
+                                </div>
+                            </td>
+                            <td>Sep 3, 2026</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>
+                                <button class="action-btn accept">Accept</button>
+                                <button class="action-btn chat">Message</button>
+                            </td>
+                        </tr>
+                        <!-- Accepted Request 1 -->
+                        <tr>
+                            <td>
+                                <div class="partner-info">
+                                    <div class="partner-avatar-placeholder" style="background-color: #7c3aed;">PS</div>
+                                    <div>
+                                        <div class="partner-name">Priya Sharma</div>
+                                        <div class="partner-dept">Design</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="exchange-info">
+                                    Teaching: <span class="teach-link">Python</span><br>
+                                    Learning: <span class="learn-link">Figma</span>
+                                </div>
+                            </td>
+                            <td>Aug 28, 2026</td>
+                            <td><span class="status-badge status-confirmed">Accepted</span></td>
+                            <td>
+                                <button class="action-btn chat">Message</button>
+                            </td>
+                        </tr>
+                        <!-- Accepted Request 2 -->
+                        <tr>
+                            <td>
+                                <div class="partner-info">
+                                    <div class="partner-avatar-placeholder" style="background-color: #14b8a6;">RD</div>
+                                    <div>
+                                        <div class="partner-name">Rohan Desai</div>
+                                        <div class="partner-dept">Information Technology</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="exchange-info">
+                                    Teaching: <span class="teach-link">Photography</span><br>
+                                    Learning: <span class="learn-link">React</span>
+                                </div>
+                            </td>
+                            <td>Aug 25, 2026</td>
+                            <td><span class="status-badge status-confirmed">Accepted</span></td>
+                            <td>
+                                <button class="action-btn chat">Message</button>
+                            </td>
+                        </tr>
+                        <!-- Completed Requests -->
+                        <tr>
+                            <td>
+                                <div class="partner-info">
+                                    <div class="partner-avatar-placeholder" style="background-color: #4361ee;">KN</div>
+                                    <div>
+                                        <div class="partner-name">Kavya Nair</div>
+                                        <div class="partner-dept">Design</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="exchange-info">
+                                    Teaching: <span class="teach-link">JavaScript</span><br>
+                                    Learning: <span class="learn-link">UI/UX Design</span>
+                                </div>
+                            </td>
+                            <td>Aug 10, 2026</td>
+                            <td><span class="status-badge status-completed">Completed</span></td>
+                            <td>
+                                <button class="action-text">Leave Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="partner-info">
+                                    <div class="partner-avatar-placeholder" style="background-color: #14b8a6;">VJ</div>
+                                    <div>
+                                        <div class="partner-name">Vikram Joshi</div>
+                                        <div class="partner-dept">Business</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="exchange-info">
+                                    Teaching: <span class="teach-link">Data Analysis</span><br>
+                                    Learning: <span class="learn-link">Public Speaking</span>
+                                </div>
+                            </td>
+                            <td>Jul 22, 2026</td>
+                            <td><span class="status-badge status-completed">Completed</span></td>
+                            <td>
+                                <button class="action-text">Leave Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="partner-info">
+                                    <div class="partner-avatar-placeholder" style="background-color: #7c3aed;">NG</div>
+                                    <div>
+                                        <div class="partner-name">Neha Gupta</div>
+                                        <div class="partner-dept">Information Technology</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="exchange-info">
+                                    Teaching: <span class="teach-link">Graphic Design</span><br>
+                                    Learning: <span class="learn-link">Python</span>
+                                </div>
+                            </td>
+                            <td>Jul 15, 2026</td>
+                            <td><span class="status-badge status-completed">Completed</span></td>
+                            <td>
+                                <button class="action-text">Leave Review</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="partner-info">
+                                    <div class="partner-avatar-placeholder" style="background-color: #ec4899;">LW</div>
+                                    <div>
+                                        <div class="partner-name">Li Wei</div>
+                                        <div class="partner-dept">Foreign Languages</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="exchange-info">
+                                    Teaching: <span class="teach-link">HTML/CSS</span><br>
+                                    Learning: <span class="learn-link">Mandarin</span>
+                                </div>
+                            </td>
+                            <td>Jul 1, 2026</td>
+                            <td><span class="status-badge status-completed">Completed</span></td>
+                            <td>
+                                <button class="action-text">Leave Review</button>
+                            </td>
+                        </tr>
+                        <!-- Declined Request -->
+                        <tr>
+                            <td>
+                                <div class="partner-info">
+                                    <div class="partner-avatar-placeholder" style="background-color: #0ea5e9;">AJ</div>
+                                    <div>
+                                        <div class="partner-name">Aria Johnson</div>
+                                        <div class="partner-dept">Business Administration</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="exchange-info">
+                                    Teaching: <span class="teach-link">Python</span><br>
+                                    Learning: <span class="learn-link">Presentation Skills</span>
+                                </div>
+                            </td>
+                            <td>Aug 18, 2026</td>
+                            <td><span class="status-badge status-declined">Declined</span></td>
+                            <td>
+                                <button class="action-text">Resend</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="logo-icon">SB</div>
+                    <span class="logo-text">SkillBridge</span>
+                </div>
+                <p>A peer-to-peer skill exchange platform built for college students. Learn, share, and grow together.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="explore.html">Explore Skills</a>
+                    <a href="mentors.html">Find Mentors</a>
+                    <a href="requests.html">Requests</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="login.html">Sign In</a>
+                    <a href="signup.html">Create Account</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SkillBridge. All rights reserved.</p>
+            <p>Made with ❤️ for students</p>
+        </div>
+    </footer>
+
+</body>
+</html>

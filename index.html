@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="SkillBridge - A peer-to-peer student skill exchange platform. Learn new skills from fellow students and share what you know.">
+    <title>SkillBridge - Learn, Share, Grow Together</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <nav class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">SB</div>
+                <div>
+                    <span class="logo-text">SkillBridge</span>
+                    <span class="logo-tagline">Peer-to-Peer Learning</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="explore.html">Explore Skills</a></li>
+                <li><a href="mentors.html">Find Mentors</a></li>
+                <li><a href="requests.html">Requests</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="btn-signin">Sign In</a>
+                <a href="signup.html" class="btn btn-primary btn-sm">Join Now</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-inner">
+                    <div class="hero-content">
+                        <span class="hero-badge">🎓 Peer-to-Peer Learning</span>
+                        <h1 class="hero-title">Learn Skills from <span class="highlight">Fellow Students</span></h1>
+                        <p class="hero-description">
+                            SkillBridge connects college students who want to learn new skills with peers who can teach
+                            them. Exchange knowledge, grow together, and build a stronger campus community.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="explore.html" class="btn btn-primary btn-lg">Explore Skills</a>
+                            <a href="mentors.html" class="btn btn-outline btn-lg">Find Mentors</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="images/hero.jpg" alt="Students learning together in a library">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Skills Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Popular Skills</h2>
+                        <p class="section-subtitle">Discover the most in-demand skills on campus</p>
+                    </div>
+                    <a href="explore.html" class="browse-link">Browse All Skills →</a>
+                </div>
+                <div class="skill-grid">
+                    <!-- Skill Card 1 -->
+                    <div class="skill-card">
+                        <img src="images/skill-python.jpg" alt="Python Programming" class="skill-card-image">
+                        <div class="skill-card-body">
+                            <div class="skill-card-meta">
+                                <span class="category-badge badge-programming">Programming</span>
+                                <span class="difficulty-badge">Beginner</span>
+                            </div>
+                            <h3 class="skill-card-title">Python Programming</h3>
+                            <p class="skill-card-desc">Master Python fundamentals, loops, data structures, and practical
+                                scripts.</p>
+                            <p class="skill-card-teacher">Taught by Arjun Mehta</p>
+                            <div class="skill-card-footer">
+                                <span class="mentor-count">2 mentors available</span>
+                                <a href="skill-details.html" class="card-link">View Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Skill Card 2 -->
+                    <div class="skill-card">
+                        <img src="images/skill-uiux.jpg" alt="UI/UX Design" class="skill-card-image">
+                        <div class="skill-card-body">
+                            <div class="skill-card-meta">
+                                <span class="category-badge badge-design">Design</span>
+                                <span class="difficulty-badge">Beginner</span>
+                            </div>
+                            <h3 class="skill-card-title">UI/UX Design</h3>
+                            <p class="skill-card-desc">Learn Figma basics, wireframing, responsive layouts, and user
+                                design systems.</p>
+                            <p class="skill-card-teacher">Taught by Priya Sharma</p>
+                            <div class="skill-card-footer">
+                                <span class="mentor-count">3 mentors available</span>
+                                <a href="skill-details.html" class="card-link">View Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Skill Card 3 -->
+                    <div class="skill-card">
+                        <img src="images/skill-react.jpg" alt="React Development" class="skill-card-image">
+                        <div class="skill-card-body">
+                            <div class="skill-card-meta">
+                                <span class="category-badge badge-programming">Programming</span>
+                                <span class="difficulty-badge">Intermediate</span>
+                            </div>
+                            <h3 class="skill-card-title">React Development</h3>
+                            <p class="skill-card-desc">Build dynamic web interfaces with modern React components, props,
+                                and hooks.</p>
+                            <p class="skill-card-teacher">Taught by Rohan Desai</p>
+                            <div class="skill-card-footer">
+                                <span class="mentor-count">4 mentors available</span>
+                                <a href="skill-details.html" class="card-link">View Details →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="section how-it-works">
+            <div class="container">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Three simple steps to start exchanging skills</p>
+                <div class="steps-grid">
+                    <!-- Step 1 -->
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-label">Step 1</span>
+                            <div class="step-icon blue">📝</div>
+                        </div>
+                        <h3>List Your Skills</h3>
+                        <p>Create your profile and list the skills you can teach and the ones you want to learn.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-label">Step 2</span>
+                            <div class="step-icon indigo">🔍</div>
+                        </div>
+                        <h3>Find a Match</h3>
+                        <p>Browse through available skills or mentors and find the perfect learning partner.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-label">Step 3</span>
+                            <div class="step-icon orange">🤝</div>
+                        </div>
+                        <h3>Start Learning</h3>
+                        <p>Send a request, connect with your peer, and begin your skill exchange journey.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Why SkillBridge?</h2>
+                        <p class="section-subtitle">Benefits of peer-to-peer learning</p>
+                    </div>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-label">Benefit</span>
+                            <div class="step-icon blue">💡</div>
+                        </div>
+                        <h3>Learn from Peers</h3>
+                        <p>Students explain concepts in a way that's easy to understand, using relatable examples and
+                            practical knowledge.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-label">Benefit</span>
+                            <div class="step-icon indigo">💰</div>
+                        </div>
+                        <h3>Completely Free</h3>
+                        <p>No fees, no subscriptions. Exchange skills freely with fellow students on your campus.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-card-header">
+                            <span class="step-label">Benefit</span>
+                            <div class="step-icon orange">🌐</div>
+                        </div>
+                        <h3>Build Connections</h3>
+                        <p>Expand your network by meeting students from different departments and backgrounds.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="section cta-section">
+            <div class="container cta-content">
+                <h2 class="section-title">Ready to Start Learning?</h2>
+                <p class="section-subtitle">Join SkillBridge today and connect with students who can help you grow.</p>
+                <div class="cta-buttons">
+                    <a href="login.html" class="btn btn-primary btn-lg">Join Now — It's Free</a>
+                    <a href="explore.html" class="btn btn-outline btn-lg">Browse Skills</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="logo-icon">SB</div>
+                    <span class="logo-text">SkillBridge</span>
+                </div>
+                <p>A peer-to-peer skill exchange platform built for college students. Learn, share, and grow together.
+                </p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="explore.html">Explore Skills</a>
+                    <a href="mentors.html">Find Mentors</a>
+                    <a href="requests.html">Requests</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="login.html">Sign In</a>
+                    <a href="signup.html">Create Account</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SkillBridge. All rights reserved.</p>
+            <p>Made with ❤️ for students</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

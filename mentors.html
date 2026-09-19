@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find student mentors on SkillBridge. Connect with peers who can teach you programming, design, languages, and more.">
+    <title>Find Mentors - SkillBridge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mentors.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <nav class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">SB</div>
+                <div>
+                    <span class="logo-text">SkillBridge</span>
+                    <span class="logo-tagline">Peer-to-Peer Learning</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explore.html">Explore Skills</a></li>
+                <li><a href="mentors.html" class="active">Find Mentors</a></li>
+                <li><a href="requests.html">Requests</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="btn-signin">Sign In</a>
+                <a href="signup.html" class="btn btn-primary btn-sm">Join Now</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Find Mentors</h1>
+                <p class="page-subtitle">Connect with experienced students who are ready to share their knowledge with you.</p>
+            </div>
+        </section>
+
+        <!-- Search and Filters -->
+        <section class="search-filters">
+            <div class="container">
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search mentors by name, skill, or department...">
+                    <select class="filter-select">
+                        <option>All Skills</option>
+                        <option>Programming</option>
+                        <option>Design</option>
+                        <option>Language</option>
+                        <option>Photography</option>
+                        <option>Business</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mentors List -->
+        <section class="section">
+            <div class="container">
+
+                <!-- Mentor Card 1 -->
+                <div class="mentor-card">
+                    <div class="mentor-avatar-placeholder blue">AM</div>
+                    <div class="mentor-info">
+                        <h3 class="mentor-name">Arjun Mehta</h3>
+                        <p class="mentor-bio">Computer Science, 3rd Year · Passionate about Python and data science. Has been coding since high school.</p>
+                        <div class="mentor-meta-row">
+                            <span class="mentor-exp-badge">Experience: 2+ Years</span>
+                            <span class="mentor-rating"><span class="star">★</span> <strong>4.8</strong> (12 reviews)</span>
+                        </div>
+                        <div class="mentor-skills">
+                            <div class="mentor-skill-group">
+                                <span class="skill-label teaches">Teaches</span>
+                                <p class="mentor-skill-list">Python, Data Analysis</p>
+                            </div>
+                            <div class="mentor-skill-group">
+                                <span class="skill-label wants">Wants to Learn</span>
+                                <p class="mentor-skill-list">Graphic Design</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mentor-actions">
+                        <a href="mentors.html" class="btn-view-profile">View Profile</a>
+                        <a href="mentors.html" class="btn btn-primary btn-sm">Connect</a>
+                    </div>
+                </div>
+
+                <!-- Mentor Card 2 -->
+                <div class="mentor-card">
+                    <div class="mentor-avatar-placeholder" style="background-color: #7c3aed;">PS</div>
+                    <div class="mentor-info">
+                        <h3 class="mentor-name">Priya Sharma</h3>
+                        <p class="mentor-bio">Design, 2nd Year · Freelance UI/UX designer with a portfolio of mobile app and web designs.</p>
+                        <div class="mentor-meta-row">
+                            <span class="mentor-exp-badge">Experience: 2 Years</span>
+                            <span class="mentor-rating"><span class="star">★</span> <strong>4.6</strong> (9 reviews)</span>
+                        </div>
+                        <div class="mentor-skills">
+                            <div class="mentor-skill-group">
+                                <span class="skill-label teaches">Teaches</span>
+                                <p class="mentor-skill-list">UI/UX Design, Figma</p>
+                            </div>
+                            <div class="mentor-skill-group">
+                                <span class="skill-label wants">Wants to Learn</span>
+                                <p class="mentor-skill-list">React Development</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mentor-actions">
+                        <a href="mentors.html" class="btn-view-profile">View Profile</a>
+                        <a href="mentors.html" class="btn btn-primary btn-sm">Connect</a>
+                    </div>
+                </div>
+
+                <!-- Mentor Card 3 -->
+                <div class="mentor-card">
+                    <div class="mentor-avatar-placeholder green">RD</div>
+                    <div class="mentor-info">
+                        <h3 class="mentor-name">Rohan Desai</h3>
+                        <p class="mentor-bio">Information Technology, 4th Year · Full-stack developer. Loves teaching React and JavaScript.</p>
+                        <div class="mentor-meta-row">
+                            <span class="mentor-exp-badge">Experience: 3+ Years</span>
+                            <span class="mentor-rating"><span class="star">★</span> <strong>4.9</strong> (15 reviews)</span>
+                        </div>
+                        <div class="mentor-skills">
+                            <div class="mentor-skill-group">
+                                <span class="skill-label teaches">Teaches</span>
+                                <p class="mentor-skill-list">React, JavaScript, Node.js</p>
+                            </div>
+                            <div class="mentor-skill-group">
+                                <span class="skill-label wants">Wants to Learn</span>
+                                <p class="mentor-skill-list">Photography</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mentor-actions">
+                        <a href="mentors.html" class="btn-view-profile">View Profile</a>
+                        <a href="mentors.html" class="btn btn-primary btn-sm">Connect</a>
+                    </div>
+                </div>
+
+                <!-- Mentor Card 4 -->
+                <div class="mentor-card">
+                    <div class="mentor-avatar-placeholder" style="background-color: #ec4899;">AS</div>
+                    <div class="mentor-info">
+                        <h3 class="mentor-name">Aarav Singh</h3>
+                        <p class="mentor-bio">Mass Communication, 3rd Year · Award-winning campus photographer with 3+ years of experience.</p>
+                        <div class="mentor-meta-row">
+                            <span class="mentor-exp-badge">Experience: 3+ Years</span>
+                            <span class="mentor-rating"><span class="star">★</span> <strong>4.7</strong> (6 reviews)</span>
+                        </div>
+                        <div class="mentor-skills">
+                            <div class="mentor-skill-group">
+                                <span class="skill-label teaches">Teaches</span>
+                                <p class="mentor-skill-list">Photography, Photo Editing</p>
+                            </div>
+                            <div class="mentor-skill-group">
+                                <span class="skill-label wants">Wants to Learn</span>
+                                <p class="mentor-skill-list">Python</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mentor-actions">
+                        <a href="mentors.html" class="btn-view-profile">View Profile</a>
+                        <a href="mentors.html" class="btn btn-primary btn-sm">Connect</a>
+                    </div>
+                </div>
+
+                <!-- Mentor Card 5 -->
+                <div class="mentor-card">
+                    <div class="mentor-avatar-placeholder" style="background-color: #0ea5e9;">MP</div>
+                    <div class="mentor-info">
+                        <h3 class="mentor-name">Meera Patel</h3>
+                        <p class="mentor-bio">Foreign Languages, 2nd Year · Fluent in Spanish and French. Enjoys teaching through conversations.</p>
+                        <div class="mentor-meta-row">
+                            <span class="mentor-exp-badge">Experience: 2 Years</span>
+                            <span class="mentor-rating"><span class="star">★</span> <strong>4.4</strong> (5 reviews)</span>
+                        </div>
+                        <div class="mentor-skills">
+                            <div class="mentor-skill-group">
+                                <span class="skill-label teaches">Teaches</span>
+                                <p class="mentor-skill-list">Spanish, French</p>
+                            </div>
+                            <div class="mentor-skill-group">
+                                <span class="skill-label wants">Wants to Learn</span>
+                                <p class="mentor-skill-list">Web Development</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mentor-actions">
+                        <a href="mentors.html" class="btn-view-profile">View Profile</a>
+                        <a href="mentors.html" class="btn btn-primary btn-sm">Connect</a>
+                    </div>
+                </div>
+
+                <!-- Mentor Card 6 -->
+                <div class="mentor-card">
+                    <img src="images/mentor-aria.jpg" alt="Aria Johnson" class="mentor-avatar">
+                    <div class="mentor-info">
+                        <h3 class="mentor-name">Aria Johnson</h3>
+                        <p class="mentor-bio">Business Administration, 3rd Year · Public speaking club president and debate champion.</p>
+                        <div class="mentor-meta-row">
+                            <span class="mentor-exp-badge">Experience: 3 Years</span>
+                            <span class="mentor-rating"><span class="star">★</span> <strong>4.3</strong> (4 reviews)</span>
+                        </div>
+                        <div class="mentor-skills">
+                            <div class="mentor-skill-group">
+                                <span class="skill-label teaches">Teaches</span>
+                                <p class="mentor-skill-list">Public Speaking, Presentation</p>
+                            </div>
+                            <div class="mentor-skill-group">
+                                <span class="skill-label wants">Wants to Learn</span>
+                                <p class="mentor-skill-list">Data Visualization</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mentor-actions">
+                        <a href="mentors.html" class="btn-view-profile">View Profile</a>
+                        <a href="mentors.html" class="btn btn-primary btn-sm">Connect</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="logo-icon">SB</div>
+                    <span class="logo-text">SkillBridge</span>
+                </div>
+                <p>A peer-to-peer skill exchange platform built for college students. Learn, share, and grow together.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="explore.html">Explore Skills</a>
+                    <a href="mentors.html">Find Mentors</a>
+                    <a href="requests.html">Requests</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="login.html">Sign In</a>
+                    <a href="signup.html">Create Account</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SkillBridge. All rights reserved.</p>
+            <p>Made with ❤️ for students</p>
+        </div>
+    </footer>
+
+</body>
+</html>
