@@ -58,8 +58,8 @@ img {
 }
 
 .logo-icon {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     background-color: #5b4cdb;
     border-radius: 8px;
     display: flex;
@@ -90,19 +90,32 @@ img {
 }
 
 .nav-links a {
+    position: relative;
     font-size: 14px;
     font-weight: 500;
     color: #636e72;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .nav-links a:hover {
     color: #5b4cdb;
+    transform: translateY(-1px);
 }
 
 .nav-links a.active {
     color: #5b4cdb;
     font-weight: 600;
+}
+
+.nav-links a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -10px;
+    height: 2px;
+    background-color: #5b4cdb;
+    border-radius: 999px;
 }
 
 .nav-actions {
@@ -158,6 +171,16 @@ img {
     max-width: 1140px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+.requests-main {
+    display: block;
+}
+
+.requests-overview,
+.request-controls,
+.request-list-section {
+    width: 100%;
 }
 
 /* Page Header */

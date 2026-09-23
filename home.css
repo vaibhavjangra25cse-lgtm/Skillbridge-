@@ -90,10 +90,11 @@ img {
 }
 
 .nav-links a {
+    position: relative;
     font-size: 14px;
     font-weight: 500;
     color: #636e72;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .nav-links a:hover {
@@ -103,6 +104,17 @@ img {
 .nav-links a.active {
     color: #5b4cdb;
     font-weight: 600;
+}
+
+.nav-links a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -12px;
+    height: 2px;
+    background-color: #5b4cdb;
+    border-radius: 999px;
 }
 
 .nav-actions {
@@ -198,8 +210,8 @@ img {
     font-weight: 700;
     padding: 6px 16px;
     border-radius: 50px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 1px;
     margin-bottom: 20px;
 }
 
@@ -209,6 +221,7 @@ img {
     line-height: 1.15;
     color: #2d3436;
     margin-bottom: 18px;
+    max-width: 560px;
 }
 
 .hero-title .highlight {
