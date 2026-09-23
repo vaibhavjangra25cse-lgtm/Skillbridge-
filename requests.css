@@ -160,6 +160,16 @@ img {
     padding: 0 20px;
 }
 
+.requests-main {
+    display: block;
+}
+
+.requests-overview,
+.request-controls,
+.request-list-section {
+    width: 100%;
+}
+
 /* Page Header */
 .page-header {
     padding: 40px 0 10px;
