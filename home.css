@@ -90,10 +90,11 @@ img {
 }
 
 .nav-links a {
+    position: relative;
     font-size: 14px;
     font-weight: 500;
     color: #636e72;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .nav-links a:hover {
@@ -103,6 +104,17 @@ img {
 .nav-links a.active {
     color: #5b4cdb;
     font-weight: 600;
+}
+
+.nav-links a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -12px;
+    height: 2px;
+    background-color: #5b4cdb;
+    border-radius: 999px;
 }
 
 .nav-actions {
