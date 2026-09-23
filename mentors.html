@@ -47,18 +47,51 @@
         <!-- Search and Filters -->
         <section class="search-filters" aria-label="Mentor search and filters">
             <div class="container">
-                <form class="search-bar" aria-label="Search mentors or skills">
-                    <label class="sr-only" for="mentor-search">Search mentors or skills</label>
-                    <input id="mentor-search" type="text" class="search-input" placeholder="Search mentors or skills">
-                    <select class="filter-select" aria-label="Filter mentors by skill">
-                        <option>Skill</option>
-                        <option>Programming</option>
-                        <option>Design</option>
-                        <option>Language</option>
-                        <option>Photography</option>
-                        <option>Business</option>
-                    </select>
-                </form>
+                <div class="search-panel">
+                    <div class="search-bar" role="search">
+                        <label class="sr-only" for="mentor-search">Search mentors or skills</label>
+                        <input id="mentor-search" type="text" class="search-input" placeholder="Search mentors or skills">
+                    </div>
+
+                    <div class="filter-row" aria-label="Filter mentors by category">
+                        <div class="filter-field">
+                            <label for="filter-skill">Skill</label>
+                            <select id="filter-skill" class="filter-select">
+                                <option>Any Skill</option>
+                                <option>Programming</option>
+                                <option>Design</option>
+                                <option>Language</option>
+                                <option>Photography</option>
+                                <option>Business</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-field">
+                            <label for="filter-department">Department</label>
+                            <select id="filter-department" class="filter-select">
+                                <option>Any Department</option>
+                                <option>Computer Science</option>
+                                <option>Design</option>
+                                <option>Business</option>
+                                <option>Languages</option>
+                                <option>Media</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-field">
+                            <label for="filter-year">Year</label>
+                            <select id="filter-year" class="filter-select">
+                                <option>Any Year</option>
+                                <option>1st Year</option>
+                                <option>2nd Year</option>
+                                <option>3rd Year</option>
+                                <option>4th Year</option>
+                            </select>
+                        </div>
+
+                        <button type="button" class="filter-button">Apply Filters</button>
+                    </div>
+                </div>
             </div>
         </section>
 
