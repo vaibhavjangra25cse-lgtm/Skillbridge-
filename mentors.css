@@ -205,11 +205,12 @@ img {
     background-repeat: no-repeat;
     background-position: 14px center;
     outline: none;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .search-input:focus {
     border-color: #5b4cdb;
+    box-shadow: 0 0 0 3px rgba(91, 76, 219, 0.08);
 }
 
 .search-input::placeholder {
@@ -227,6 +228,23 @@ img {
     outline: none;
     cursor: pointer;
     min-width: 160px;
+    transition: border-color 0.2s ease;
+}
+
+.filter-select:focus {
+    border-color: #5b4cdb;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 /* Section */

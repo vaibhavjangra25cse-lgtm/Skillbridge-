@@ -47,17 +47,18 @@
         <!-- Search and Filters -->
         <section class="search-filters" aria-label="Mentor search and filters">
             <div class="container">
-                <div class="search-bar">
-                    <input type="text" class="search-input" placeholder="Search mentors by name, skill, or department...">
-                    <select class="filter-select">
-                        <option>All Skills</option>
+                <form class="search-bar" aria-label="Search mentors or skills">
+                    <label class="sr-only" for="mentor-search">Search mentors or skills</label>
+                    <input id="mentor-search" type="text" class="search-input" placeholder="Search mentors or skills">
+                    <select class="filter-select" aria-label="Filter mentors by skill">
+                        <option>Skill</option>
                         <option>Programming</option>
                         <option>Design</option>
                         <option>Language</option>
                         <option>Photography</option>
                         <option>Business</option>
                     </select>
-                </div>
+                </form>
             </div>
         </section>
 
