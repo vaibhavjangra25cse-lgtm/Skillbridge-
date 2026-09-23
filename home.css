@@ -241,6 +241,10 @@ img {
     gap: 14px;
 }
 
+.hero-buttons .btn {
+    min-width: 150px;
+}
+
 .hero-image {
     flex: 1;
     max-width: 500px;
