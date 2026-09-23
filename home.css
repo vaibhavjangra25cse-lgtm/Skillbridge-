@@ -210,8 +210,8 @@ img {
     font-weight: 700;
     padding: 6px 16px;
     border-radius: 50px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 1px;
     margin-bottom: 20px;
 }
 
@@ -221,6 +221,7 @@ img {
     line-height: 1.15;
     color: #2d3436;
     margin-bottom: 18px;
+    max-width: 560px;
 }
 
 .hero-title .highlight {
