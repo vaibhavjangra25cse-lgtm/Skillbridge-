@@ -360,8 +360,16 @@ ul {
         display: none;
     }
 
+    .login-section {
+        padding: 48px 20px;
+    }
+
     .login-card {
         padding: 36px 24px;
+    }
+
+    .login-title {
+        font-size: 28px;
     }
 
     .footer-container {
@@ -390,6 +398,15 @@ ul {
     }
 
     .login-title {
-        font-size: 22px;
+        font-size: 24px;
+    }
+
+    .login-subtitle {
+        font-size: 14px;
+    }
+
+    .form-input,
+    .form-btn {
+        font-size: 14px;
     }
 }
