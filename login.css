@@ -13,8 +13,8 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    color: #2d3436;
-    background-color: #f8f9fa;
+    color: #1E293B;
+    background-color: #F8FAFC;
     line-height: 1.6;
 }
 
@@ -157,9 +157,10 @@ ul {
 
 /* The white card */
 .login-card {
-    background-color: #ffffff;
-    border: 1px solid #e9ecef;
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
     padding: 48px 44px;
     width: 100%;
     max-width: 440px;
@@ -177,20 +178,21 @@ ul {
 .login-brand .logo-text {
     font-size: 18px;
     font-weight: 700;
-    color: #2d3436;
+    color: #1E293B;
 }
 
 /* Card heading and subheading */
 .login-title {
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 800;
-    color: #2d3436;
-    margin-bottom: 6px;
+    line-height: 1.2;
+    color: #1E293B;
+    margin-bottom: 8px;
 }
 
 .login-subtitle {
-    font-size: 14px;
-    color: #636e72;
+    font-size: 15px;
+    color: #64748B;
     margin-bottom: 30px;
 }
 
