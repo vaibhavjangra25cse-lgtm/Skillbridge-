@@ -320,11 +320,15 @@ img {
 }
 
 .badge-programming {
-    background-color: #4361ee;
+    background-color: #2563EB;
 }
 
 .badge-design {
-    background-color: #7c3aed;
+    background-color: #7C3AED;
+}
+
+.badge-marketing {
+    background-color: #F59E0B;
 }
 
 .badge-language {
