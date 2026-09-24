@@ -13,8 +13,8 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    color: #2d3436;
-    background-color: #ffffff;
+    color: #1E293B;
+    background-color: #F8FAFC;
     line-height: 1.6;
 }
 
@@ -34,8 +34,8 @@ img {
 
 /* Navigation */
 .navbar {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e9ecef;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
     padding: 12px 0;
     position: sticky;
     top: 0;
@@ -43,43 +43,46 @@ img {
 }
 
 .nav-container {
-    max-width: 1140px;
+    max-width: 1180px;
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 24px;
 }
 
 .nav-logo {
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: 0;
 }
 
 .logo-icon {
     width: 36px;
     height: 36px;
-    background-color: #5b4cdb;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #FFFFFF;
     font-weight: 700;
     font-size: 16px;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.18);
 }
 
 .logo-text {
     font-size: 20px;
     font-weight: 700;
-    color: #2d3436;
+    color: #1E293B;
 }
 
 .logo-tagline {
     display: block;
     font-size: 11px;
-    color: #636e72;
+    color: #64748B;
     margin-top: -2px;
 }
 
@@ -92,16 +95,16 @@ img {
 .nav-links a {
     font-size: 14px;
     font-weight: 500;
-    color: #636e72;
-    transition: color 0.2s ease;
+    color: #64748B;
+    transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .nav-links a:hover {
-    color: #5b4cdb;
+    color: #2563EB;
 }
 
 .nav-links a.active {
-    color: #5b4cdb;
+    color: #2563EB;
     font-weight: 600;
 }
 
@@ -114,12 +117,12 @@ img {
 .btn-signin {
     font-size: 14px;
     font-weight: 500;
-    color: #636e72;
+    color: #64748B;
     transition: color 0.2s ease;
 }
 
 .btn-signin:hover {
-    color: #5b4cdb;
+    color: #2563EB;
 }
 
 /* Buttons */
