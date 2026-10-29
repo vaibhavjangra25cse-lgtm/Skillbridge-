@@ -1,0 +1,89 @@
+{
+  "pageHeader": {
+    "title": "Share Your Feedback",
+    "subtitle": "Help us improve SkillBridge! Let us know about your experience, ideas for improvements, or any issues you encountered."
+  },
+  "form": {
+    "fields": {
+      "name": {
+        "label": "Full Name",
+        "placeholder": "Enter your full name",
+        "required": true
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "you@college.edu",
+        "required": true
+      },
+      "category": {
+        "label": "Feedback Category",
+        "defaultOption": "Select a category",
+        "required": true,
+        "options": [
+          "Website Design",
+          "User Experience",
+          "Skills and Learning",
+          "Mentorship",
+          "Technical Issue",
+          "Feature Request",
+          "Other"
+        ]
+      },
+      "rating": {
+        "label": "Overall Rating",
+        "required": true,
+        "descriptions": {
+          "1": "1 Star — Poor",
+          "2": "2 Stars — Fair",
+          "3": "3 Stars — Good",
+          "4": "4 Stars — Very Good",
+          "5": "5 Stars — Excellent"
+        }
+      },
+      "like": {
+        "label": "What did you like?",
+        "placeholder": "Tell us what features or experiences you enjoyed most (optional)",
+        "required": false
+      },
+      "improve": {
+        "label": "What should we improve?",
+        "placeholder": "Tell us what could be made clearer, faster, or better",
+        "required": true
+      },
+      "comments": {
+        "label": "Additional Comments",
+        "placeholder": "Any other thoughts, ideas, or feedback you'd like to share (optional)",
+        "required": false
+      },
+      "recommendation": {
+        "label": "Would you recommend SkillBridge to others?",
+        "required": false,
+        "options": [
+          { "value": "Yes", "label": "Yes" },
+          { "value": "Maybe", "label": "Maybe" },
+          { "value": "No", "label": "No" }
+        ]
+      }
+    },
+    "buttons": {
+      "submit": "Submit Feedback",
+      "submitProcessing": "Submitting...",
+      "reset": "Reset Form"
+    },
+    "messages": {
+      "validationError": "Please correct the errors in the form before submitting.",
+      "demoNoticeTitle": "Frontend Demonstration Only",
+      "demoNoticeBody": "Form validation passed! SkillBridge currently runs as a frontend static application with no backend server or database connected. Your feedback was validated successfully on the client side, but has not been sent or stored anywhere.",
+      "resetConfirm": "Form fields have been reset to their default state.",
+      "errors": {
+        "nameRequired": "Please enter your full name.",
+        "emailRequired": "Please enter your email address.",
+        "emailInvalid": "Please enter a valid email address.",
+        "categoryRequired": "Please select a feedback category.",
+        "ratingRequired": "Please select an overall rating (1 to 5 stars).",
+        "improveRequired": "Please share what we should improve."
+      }
+    }
+  }
+}
+

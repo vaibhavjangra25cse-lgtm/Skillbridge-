@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Share your feedback on SkillBridge. Help us improve the peer-to-peer student skill exchange experience.">
+    <title>Feedback - SkillBridge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="feedback.css">
+    <script src="js/feedback.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <nav class="nav-container" aria-label="Primary navigation">
+            <a href="index.html" class="nav-logo" aria-label="SkillBridge home page">
+                <div class="logo-icon">SB</div>
+                <div>
+                    <span class="logo-text">SkillBridge</span>
+                    <span class="logo-tagline">Peer-to-Peer Learning</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explore.html">Explore Skills</a></li>
+                <li><a href="mentors.html">Find Mentors</a></li>
+                <li><a href="requests.html">Requests</a></li>
+                <li><a href="feedback.html" class="active" aria-current="page">Feedback</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="btn-signin">Sign In</a>
+                <a href="signup.html" class="btn btn-primary btn-sm">Join Now</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title" id="page-title">Share Your Feedback</h1>
+                <p class="page-subtitle" id="page-subtitle">Help us improve SkillBridge! Let us know about your experience, ideas for improvements, or any issues you encountered.</p>
+            </div>
+        </section>
+
+        <!-- Feedback Form Section -->
+        <section class="feedback-section">
+            <div class="feedback-container">
+                <div class="feedback-card">
+
+                    <!-- Alert / Demo Notification Area -->
+                    <div id="feedback-alert-container" aria-live="polite"></div>
+
+                    <form id="feedback-form" novalidate>
+
+                        <!-- 1. Full Name (Required) & 2. Email Address (Required) -->
+                        <div class="form-row">
+                            <div class="form-group" id="group-name">
+                                <label for="feedback-name" class="form-label" id="label-name">
+                                    Full Name <span class="required-star" aria-hidden="true">*</span>
+                                </label>
+                                <input type="text" id="feedback-name" class="form-input" placeholder="Enter your full name" required autocomplete="name">
+                                <span class="field-error" id="error-name" aria-live="polite"></span>
+                            </div>
+
+                            <div class="form-group" id="group-email">
+                                <label for="feedback-email" class="form-label" id="label-email">
+                                    Email Address <span class="required-star" aria-hidden="true">*</span>
+                                </label>
+                                <input type="email" id="feedback-email" class="form-input" placeholder="you@college.edu" required autocomplete="email">
+                                <span class="field-error" id="error-email" aria-live="polite"></span>
+                            </div>
+                        </div>
+
+                        <!-- 3. Feedback Category (Required) -->
+                        <div class="form-group" id="group-category">
+                            <label for="feedback-category" class="form-label" id="label-category">
+                                Feedback Category <span class="required-star" aria-hidden="true">*</span>
+                            </label>
+                            <select id="feedback-category" class="form-select" required>
+                                <option value="">Select a category</option>
+                            </select>
+                            <span class="field-error" id="error-category" aria-live="polite"></span>
+                        </div>
+
+                        <!-- 4. Overall Rating (Required: 1 to 5 stars) -->
+                        <div class="form-group" id="group-rating">
+                            <label class="form-label" id="label-rating">
+                                Overall Rating <span class="required-star" aria-hidden="true">*</span>
+                            </label>
+                            <div class="star-rating-wrapper">
+                                <div class="star-rating" role="radiogroup" aria-labelledby="label-rating">
+                                    <input type="radio" id="star-5" name="rating" value="5">
+                                    <label for="star-5" title="5 Stars — Excellent" aria-label="5 stars">★</label>
+
+                                    <input type="radio" id="star-4" name="rating" value="4">
+                                    <label for="star-4" title="4 Stars — Very Good" aria-label="4 stars">★</label>
+
+                                    <input type="radio" id="star-3" name="rating" value="3">
+                                    <label for="star-3" title="3 Stars — Good" aria-label="3 stars">★</label>
+
+                                    <input type="radio" id="star-2" name="rating" value="2">
+                                    <label for="star-2" title="2 Stars — Fair" aria-label="2 stars">★</label>
+
+                                    <input type="radio" id="star-1" name="rating" value="1">
+                                    <label for="star-1" title="1 Star — Poor" aria-label="1 star">★</label>
+                                </div>
+                                <div class="rating-description" id="rating-desc" aria-live="polite">Select a rating</div>
+                            </div>
+                            <span class="field-error" id="error-rating" aria-live="polite"></span>
+                        </div>
+
+                        <!-- 5. What did you like? (Optional) -->
+                        <div class="form-group" id="group-like">
+                            <label for="feedback-like" class="form-label" id="label-like">
+                                What did you like?
+                            </label>
+                            <textarea id="feedback-like" class="form-textarea" placeholder="Tell us what features or experiences you enjoyed most (optional)" rows="3"></textarea>
+                        </div>
+
+                        <!-- 6. What should we improve? (Required) -->
+                        <div class="form-group" id="group-improve">
+                            <label for="feedback-improve" class="form-label" id="label-improve">
+                                What should we improve? <span class="required-star" aria-hidden="true">*</span>
+                            </label>
+                            <textarea id="feedback-improve" class="form-textarea" placeholder="Tell us what could be made clearer, faster, or better" rows="4" required></textarea>
+                            <span class="field-error" id="error-improve" aria-live="polite"></span>
+                        </div>
+
+                        <!-- 7. Additional Comments (Optional) -->
+                        <div class="form-group" id="group-comments">
+                            <label for="feedback-comments" class="form-label" id="label-comments">
+                                Additional Comments
+                            </label>
+                            <textarea id="feedback-comments" class="form-textarea" placeholder="Any other thoughts, ideas, or feedback you'd like to share (optional)" rows="3"></textarea>
+                        </div>
+
+                        <!-- 8. Recommendation (Yes, Maybe, No) -->
+                        <div class="form-group" id="group-recommendation">
+                            <label class="form-label" id="label-recommendation">
+                                Would you recommend SkillBridge to others?
+                            </label>
+                            <div class="recommend-group" role="radiogroup" aria-labelledby="label-recommendation" id="recommendation-options">
+                                <!-- Options dynamically rendered or fallback static -->
+                                <label class="recommend-option" for="recommend-yes">
+                                    <input type="radio" id="recommend-yes" name="recommendation" value="Yes">
+                                    <span>Yes</span>
+                                </label>
+                                <label class="recommend-option" for="recommend-maybe">
+                                    <input type="radio" id="recommend-maybe" name="recommendation" value="Maybe">
+                                    <span>Maybe</span>
+                                </label>
+                                <label class="recommend-option" for="recommend-no">
+                                    <input type="radio" id="recommend-no" name="recommendation" value="No">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 9. Submit & 10. Reset Buttons -->
+                        <div class="form-actions">
+                            <button type="submit" id="btn-submit-feedback" class="btn-submit">Submit Feedback</button>
+                            <button type="button" id="btn-reset-feedback" class="btn-reset">Reset Form</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="logo-icon">SB</div>
+                    <span class="logo-text">SkillBridge</span>
+                </div>
+                <p>A peer-to-peer skill exchange platform built for college students. Learn, share, and grow together.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="explore.html">Explore Skills</a>
+                    <a href="mentors.html">Find Mentors</a>
+                    <a href="requests.html">Requests</a>
+                    <a href="feedback.html">Feedback</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="login.html">Sign In</a>
+                    <a href="signup.html">Create Account</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SkillBridge. All rights reserved.</p>
+            <p><a href="index.html" style="color: inherit; text-decoration: underline;">Return to Home</a> · Made with ❤️ for students</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
