@@ -2,9 +2,18 @@
  * SkillBridge - Explore Skills Logic
  * Dedicated JavaScript file for explore.html
  * Fetches data strictly from data/explore.json
+ *
+ * NOTE: Dynamic data loading requires an HTTP server.
+ * Open via VS Code Live Server or any local server — do NOT use file:// directly.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.protocol === 'file:') {
+        showFileProtocolBanner();
+        // Keep existing static HTML cards visible — do not replace them with an error
+        setupExploreInteractions();
+        return;
+    }
     loadExploreData();
 });
 
@@ -199,5 +208,42 @@ function renderErrorState(errorMessage) {
     p.textContent = `Unable to load skills: ${errorMessage}. Please try refreshing.`;
     errorBox.append(p);
     grid.append(errorBox);
+}
+
+/**
+ * Shows a dismissible banner when the page is opened via file:// protocol.
+ * Dynamic data requires an HTTP server (e.g. VS Code Live Server).
+ */
+function showFileProtocolBanner() {
+    const banner = document.createElement('div');
+    banner.id = 'file-protocol-banner';
+    banner.setAttribute('role', 'status');
+    banner.style.cssText = [
+        'position:fixed', 'top:0', 'left:0', 'right:0', 'z-index:9999',
+        'background:#1e40af', 'color:#fff', 'padding:0.75rem 1.25rem',
+        'display:flex', 'align-items:center', 'justify-content:space-between',
+        'font-family:Inter,sans-serif', 'font-size:0.875rem', 'line-height:1.4',
+        'box-shadow:0 2px 8px rgba(0,0,0,0.3)'
+    ].join(';');
+
+    const msg = document.createElement('span');
+    msg.textContent = '⚠️  For live data, open this page via a local server (e.g. VS Code → "Go Live"). ' +
+        'Static content is visible below — all navigation works normally.';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '✕';
+    closeBtn.setAttribute('aria-label', 'Dismiss notice');
+    closeBtn.style.cssText = [
+        'background:transparent', 'border:1px solid rgba(255,255,255,0.5)',
+        'color:#fff', 'cursor:pointer', 'border-radius:4px',
+        'padding:0.25rem 0.5rem', 'font-size:1rem', 'margin-left:1rem', 'flex-shrink:0'
+    ].join(';');
+    closeBtn.addEventListener('click', () => banner.remove());
+
+    banner.append(msg, closeBtn);
+    document.body.prepend(banner);
+
+    // Push main content down so banner doesn't overlap navbar
+    document.body.style.paddingTop = '48px';
 }
 
