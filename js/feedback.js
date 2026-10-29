@@ -1,15 +1,18 @@
 /**
  * SkillBridge - Feedback Page Logic
  * Dedicated JavaScript file for feedback.html
- * Fetches data strictly from data/feedback.json
+ * Fetches data strictly from data/feedback.json (or ../data/feedback.json)
  */
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadFeedbackData();
-});
 
 let feedbackConfig = null;
 let isSubmitting = false;
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Setup form event listeners immediately so validation and preventDefault are active
+    setupFormInteractions();
+    // Asynchronously load feedback configuration from JSON
+    loadFeedbackData();
+});
 
 async function loadFeedbackData() {
     const card = document.querySelector('.feedback-card');
@@ -18,7 +21,18 @@ async function loadFeedbackData() {
     }
 
     try {
-        const response = await fetch('data/feedback.json');
+        // Try relative path from page (data/feedback.json) first, then fallback to (../data/feedback.json)
+        let response = null;
+        try {
+            response = await fetch('data/feedback.json');
+        } catch (e) {
+            response = null;
+        }
+
+        if (!response || !response.ok) {
+            response = await fetch('../data/feedback.json');
+        }
+
         if (!response.ok) {
             throw new Error(`Failed to load feedback configuration: ${response.status} ${response.statusText}`);
         }
@@ -28,9 +42,6 @@ async function loadFeedbackData() {
 
         // Apply configuration and labels from JSON
         applyFeedbackConfig(data);
-
-        // Bind form interactions and validations
-        setupFormInteractions();
 
     } catch (error) {
         console.error('Error loading feedback data:', error);
@@ -123,6 +134,9 @@ function applyFeedbackConfig(data) {
             label.append(radio, textSpan);
             recContainer.append(label);
         });
+
+        // Re-bind recommendation radio listeners
+        bindRecommendationRadios();
     }
 
     // Buttons
@@ -172,16 +186,8 @@ function setupFormInteractions() {
         });
     }
 
-    // Recommendation radio styling
-    const recOptions = document.querySelectorAll('.recommend-option input[type="radio"]');
-    recOptions.forEach(r => {
-        r.addEventListener('change', () => {
-            document.querySelectorAll('.recommend-option').forEach(opt => opt.classList.remove('selected'));
-            if (r.checked && r.parentElement) {
-                r.parentElement.classList.add('selected');
-            }
-        });
-    });
+    // Recommendation radio listeners
+    bindRecommendationRadios();
 
     // Clear individual errors on input
     bindInputErrorClearing('feedback-name', 'name');
@@ -200,6 +206,18 @@ function setupFormInteractions() {
     }
 }
 
+function bindRecommendationRadios() {
+    const recOptions = document.querySelectorAll('.recommend-option input[type="radio"]');
+    recOptions.forEach(r => {
+        r.addEventListener('change', () => {
+            document.querySelectorAll('.recommend-option').forEach(opt => opt.classList.remove('selected'));
+            if (r.checked && r.parentElement) {
+                r.parentElement.classList.add('selected');
+            }
+        });
+    });
+}
+
 function updateRatingDescription(val, isHover = false) {
     const ratingDesc = document.getElementById('rating-desc');
     if (!ratingDesc) return;
@@ -213,7 +231,16 @@ function updateRatingDescription(val, isHover = false) {
         }
     }
 
-    ratingDesc.textContent = `${val} Star${val > 1 ? 's' : ''}`;
+    const defaultLabels = {
+        '1': '1 Star — Poor',
+        '2': '2 Stars — Fair',
+        '3': '3 Stars — Good',
+        '4': '4 Stars — Very Good',
+        '5': '5 Stars — Excellent'
+    };
+
+    const label = defaultLabels[val] || `${val} Star${val > 1 ? 's' : ''}`;
+    ratingDesc.textContent = isHover ? `${label} (Click to rate)` : label;
 }
 
 function bindInputErrorClearing(inputId, errorKey) {
@@ -329,7 +356,9 @@ function validateFeedbackForm() {
 }
 
 async function handleFormSubmit(e) {
-    e.preventDefault();
+    if (e && typeof e.preventDefault === 'function') {
+        e.preventDefault();
+    }
 
     // Prevent duplicate submissions while in progress
     if (isSubmitting) return;
@@ -364,11 +393,8 @@ async function handleFormSubmit(e) {
         await new Promise(resolve => setTimeout(resolve, 600));
 
         // NOTICE: SkillBridge is a static frontend project with no backend server.
-        // As strictly required: we do NOT pretend it was saved to a database,
-        // and we do NOT silently discard it while showing a false server success message.
-        // We clearly inform the user with a Frontend Demonstration Notice,
-        // and do not persist private feedback on the client or in JSON files.
-
+        // As strictly required: we do not pretend it was saved to a database,
+        // and clearly inform the user with a Frontend Demonstration Notice.
         const noticeTitle = (feedbackConfig && feedbackConfig.form && feedbackConfig.form.messages &&
             feedbackConfig.form.messages.demoNoticeTitle) || 'Frontend Demonstration Only';
 
