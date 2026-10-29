@@ -1,0 +1,139 @@
+{
+  "hero": {
+    "badge": "SkillBridge",
+    "title": "Learn from students who are already ahead",
+    "highlight": "students who are already ahead",
+    "description": "SkillBridge helps college students exchange practical skills, share knowledge, and connect with peer mentors who can teach them exactly what they need to grow.",
+    "primaryCta": {
+      "text": "Explore Skills",
+      "href": "explore.html"
+    },
+    "secondaryCta": {
+      "text": "Find a Mentor",
+      "href": "mentors.html"
+    }
+  },
+  "popularSkills": {
+    "title": "Popular Skills",
+    "subtitle": "Discover the most in-demand skills on campus",
+    "browseLink": {
+      "text": "Browse All Skills →",
+      "href": "explore.html"
+    },
+    "skills": [
+      {
+        "category": "Programming",
+        "categoryClass": "badge-programming",
+        "difficulty": "Beginner",
+        "title": "Programming",
+        "description": "Build a strong foundation in coding, problem-solving, and practical projects."
+      },
+      {
+        "category": "Design",
+        "categoryClass": "badge-design",
+        "difficulty": "Beginner",
+        "title": "Graphic Design",
+        "description": "Learn visual composition, branding basics, and tools for creating polished graphics."
+      },
+      {
+        "category": "Creative",
+        "categoryClass": "badge-design",
+        "difficulty": "Beginner",
+        "title": "Video Editing",
+        "description": "Turn raw footage into engaging stories with editing, sound, and motion basics."
+      },
+      {
+        "category": "Creative",
+        "categoryClass": "badge-photography",
+        "difficulty": "Beginner",
+        "title": "Photography",
+        "description": "Practice composition, lighting, and camera techniques for stronger photographs."
+      },
+      {
+        "category": "Communication",
+        "categoryClass": "badge-business",
+        "difficulty": "Intermediate",
+        "title": "Public Speaking",
+        "description": "Build confidence and deliver clear presentations in classrooms and beyond."
+      },
+      {
+        "category": "Communication",
+        "categoryClass": "badge-language",
+        "difficulty": "Beginner",
+        "title": "Languages",
+        "description": "Practice conversation and develop useful language skills with fellow students."
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Three simple steps to start exchanging skills",
+    "steps": [
+      {
+        "step": "01",
+        "icon": "📝",
+        "iconColor": "blue",
+        "title": "Create Your Profile",
+        "description": "Set up your profile and share the skills you can teach and the ones you want to learn."
+      },
+      {
+        "step": "02",
+        "icon": "🔍",
+        "iconColor": "indigo",
+        "title": "Discover Skills & Mentors",
+        "description": "Explore available skills and mentors to find the right learning partner for you."
+      },
+      {
+        "step": "03",
+        "icon": "🤝",
+        "iconColor": "orange",
+        "title": "Connect & Learn",
+        "description": "Send a request, connect with your peer, and begin your skill exchange journey."
+      }
+    ]
+  },
+  "benefits": {
+    "title": "Why SkillBridge?",
+    "subtitle": "Benefits of peer-to-peer learning",
+    "items": [
+      {
+        "label": "Benefit",
+        "icon": "💡",
+        "iconColor": "blue",
+        "title": "Learn from Peers",
+        "description": "Students explain concepts in a way that's easy to understand, using relatable examples and practical knowledge."
+      },
+      {
+        "label": "Benefit",
+        "icon": "💰",
+        "iconColor": "indigo",
+        "title": "Completely Free",
+        "description": "No fees, no subscriptions. Exchange skills freely with fellow students on your campus."
+      },
+      {
+        "label": "Benefit",
+        "icon": "🌐",
+        "iconColor": "orange",
+        "title": "Build Connections",
+        "description": "Expand your network by meeting students from different departments and backgrounds."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Start Learning?",
+    "subtitle": "Join SkillBridge today and connect with students who can help you grow.",
+    "buttons": [
+      {
+        "text": "Join Now — It's Free",
+        "href": "login.html",
+        "className": "btn btn-primary btn-lg"
+      },
+      {
+        "text": "Browse Skills",
+        "href": "explore.html",
+        "className": "btn btn-outline btn-lg"
+      }
+    ]
+  }
+}
+

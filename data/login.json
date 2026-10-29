@@ -1,0 +1,36 @@
+{
+  "pageTitle": "Sign In - SkillBridge",
+  "card": {
+    "brand": {
+      "icon": "SB",
+      "text": "SkillBridge"
+    },
+    "title": "Welcome Back",
+    "subtitle": "Sign in to continue your learning journey",
+    "fields": [
+      {
+        "id": "login-email",
+        "label": "Email Address",
+        "type": "email",
+        "placeholder": "you@college.edu",
+        "required": true
+      },
+      {
+        "id": "login-password",
+        "label": "Password",
+        "type": "password",
+        "placeholder": "Enter your password",
+        "required": true
+      }
+    ],
+    "submitButton": {
+      "text": "Sign In"
+    },
+    "footer": {
+      "prompt": "Don't have an account?",
+      "linkText": "Create Account",
+      "linkHref": "signup.html"
+    }
+  }
+}
+

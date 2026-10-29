@@ -1,0 +1,157 @@
+{
+  "pageHeader": {
+    "title": "Find Mentors",
+    "subtitle": "Connect with students who can teach practical skills, share real experience, and help you grow faster in your academic and personal projects."
+  },
+  "filterOptions": {
+    "skills": ["Any Skill", "Programming", "Design", "Language", "Photography", "Business"],
+    "departments": ["Any Department", "Computer Science", "Design", "Business", "Languages", "Media"],
+    "years": ["Any Year", "1st Year", "2nd Year", "3rd Year", "4th Year"],
+    "experiences": ["Any Experience", "Beginner", "1-2 Years", "2-3 Years", "3+ Years"]
+  },
+  "mentors": [
+    {
+      "id": 1,
+      "name": "Arjun Mehta",
+      "avatar": {
+        "type": "initials",
+        "text": "AM",
+        "className": "mentor-avatar-placeholder blue"
+      },
+      "bio": "Computer Science, 3rd Year · Passionate about Python and data science. Has been coding since high school.",
+      "department": "Computer Science",
+      "year": "3rd Year",
+      "experience": "2+ Years",
+      "rating": 4.8,
+      "reviews": 12,
+      "teaches": "Python, Data Analysis",
+      "wantsToLearn": "Graphic Design"
+    },
+    {
+      "id": 2,
+      "name": "Priya Sharma",
+      "avatar": {
+        "type": "initials",
+        "text": "PS",
+        "className": "mentor-avatar-placeholder",
+        "bgColor": "#7c3aed"
+      },
+      "bio": "Design, 2nd Year · Freelance UI/UX designer with a portfolio of mobile app and web designs.",
+      "department": "Design",
+      "year": "2nd Year",
+      "experience": "2 Years",
+      "rating": 4.6,
+      "reviews": 9,
+      "teaches": "UI/UX Design, Figma",
+      "wantsToLearn": "React Development"
+    },
+    {
+      "id": 3,
+      "name": "Rohan Desai",
+      "avatar": {
+        "type": "initials",
+        "text": "RD",
+        "className": "mentor-avatar-placeholder green"
+      },
+      "bio": "Information Technology, 4th Year · Full-stack developer. Loves teaching React and JavaScript.",
+      "department": "Computer Science",
+      "year": "4th Year",
+      "experience": "3+ Years",
+      "rating": 4.9,
+      "reviews": 15,
+      "teaches": "React, JavaScript, Node.js",
+      "wantsToLearn": "Photography"
+    },
+    {
+      "id": 4,
+      "name": "Aarav Singh",
+      "avatar": {
+        "type": "initials",
+        "text": "AS",
+        "className": "mentor-avatar-placeholder",
+        "bgColor": "#ec4899"
+      },
+      "bio": "Mass Communication, 3rd Year · Award-winning campus photographer with 3+ years of experience.",
+      "department": "Media",
+      "year": "3rd Year",
+      "experience": "3+ Years",
+      "rating": 4.7,
+      "reviews": 6,
+      "teaches": "Photography, Photo Editing",
+      "wantsToLearn": "Python"
+    },
+    {
+      "id": 5,
+      "name": "Meera Patel",
+      "avatar": {
+        "type": "initials",
+        "text": "MP",
+        "className": "mentor-avatar-placeholder",
+        "bgColor": "#0ea5e9"
+      },
+      "bio": "Foreign Languages, 2nd Year · Fluent in Spanish and French. Enjoys teaching through conversations.",
+      "department": "Languages",
+      "year": "2nd Year",
+      "experience": "2 Years",
+      "rating": 4.4,
+      "reviews": 5,
+      "teaches": "Spanish, French",
+      "wantsToLearn": "Web Development"
+    },
+    {
+      "id": 6,
+      "name": "Aria Johnson",
+      "avatar": {
+        "type": "image",
+        "src": "images/mentor-aria.jpg",
+        "alt": "Aria Johnson",
+        "className": "mentor-avatar"
+      },
+      "bio": "Business Administration, 3rd Year · Public speaking club president and debate champion.",
+      "department": "Business",
+      "year": "3rd Year",
+      "experience": "3 Years",
+      "rating": 4.3,
+      "reviews": 4,
+      "teaches": "Public Speaking, Presentation",
+      "wantsToLearn": "Data Visualization"
+    },
+    {
+      "id": 7,
+      "name": "Nikhil Kapoor",
+      "avatar": {
+        "type": "initials",
+        "text": "NK",
+        "className": "mentor-avatar-placeholder",
+        "bgColor": "#f59e0b"
+      },
+      "bio": "Mechanical Engineering, 2nd Year · Helps students learn CAD, design thinking, and practical prototyping.",
+      "department": "Design",
+      "year": "2nd Year",
+      "experience": "2+ Years",
+      "rating": 4.5,
+      "reviews": 8,
+      "teaches": "AutoCAD, Design Basics",
+      "wantsToLearn": "Machine Learning"
+    },
+    {
+      "id": 8,
+      "name": "Sana Verma",
+      "avatar": {
+        "type": "initials",
+        "text": "SV",
+        "className": "mentor-avatar-placeholder",
+        "bgColor": "#10b981"
+      },
+      "bio": "Economics, 3rd Year · Teaches research, financial analysis, and smart study systems.",
+      "department": "Business",
+      "year": "3rd Year",
+      "experience": "3 Years",
+      "rating": 4.6,
+      "reviews": 7,
+      "teaches": "Excel, Research, Finance Basics",
+      "wantsToLearn": "UI Design"
+    }
+  ]
+}
+

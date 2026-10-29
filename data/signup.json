@@ -1,0 +1,84 @@
+{
+  "pageTitle": "Create Account - SkillBridge",
+  "card": {
+    "brand": {
+      "icon": "SB",
+      "text": "SkillBridge"
+    },
+    "title": "Join SkillBridge",
+    "subtitle": "Start learning and sharing your skills with fellow students.",
+    "fields": [
+      {
+        "id": "signup-firstname",
+        "label": "First Name",
+        "placeholder": "First name",
+        "required": true
+      },
+      {
+        "id": "signup-lastname",
+        "label": "Last Name",
+        "placeholder": "Last name",
+        "required": true
+      },
+      {
+        "id": "signup-email",
+        "label": "College Email",
+        "type": "email",
+        "placeholder": "you@college.edu",
+        "required": true
+      },
+      {
+        "id": "signup-department",
+        "label": "Department",
+        "defaultOption": "Select your department",
+        "options": [
+          "Computer Science",
+          "Information Technology",
+          "Design",
+          "Business Administration",
+          "Mass Communication",
+          "Foreign Languages",
+          "Other"
+        ],
+        "required": true
+      },
+      {
+        "id": "signup-year",
+        "label": "Year / Semester",
+        "defaultOption": "Select your year",
+        "options": [
+          "1st Year",
+          "2nd Year",
+          "3rd Year",
+          "4th Year",
+          "Postgraduate"
+        ],
+        "required": true
+      },
+      {
+        "id": "signup-password",
+        "label": "Password",
+        "type": "password",
+        "placeholder": "Create a password",
+        "required": true
+      },
+      {
+        "id": "signup-confirm",
+        "label": "Confirm Password",
+        "type": "password",
+        "placeholder": "Confirm your password",
+        "required": true
+      }
+    ],
+    "submitButton": {
+      "text": "Create Account"
+    },
+    "terms": "By creating an account, you agree to our Terms of Service.",
+    "footer": {
+      "prompt": "Already have an account?",
+      "linkText": "Sign In →",
+      "linkHref": "login.html"
+    }
+  }
+}
+

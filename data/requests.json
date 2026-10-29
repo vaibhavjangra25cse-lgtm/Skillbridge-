@@ -1,0 +1,175 @@
+{
+  "pageHeader": {
+    "title": "Learning Requests",
+    "subtitle": "Track and manage all your skill exchange requests in one place."
+  },
+  "summary": {
+    "pending": 3,
+    "accepted": 2,
+    "completed": 4,
+    "declined": 1
+  },
+  "requests": [
+    {
+      "id": 1,
+      "partner": {
+        "name": "Arjun Mehta",
+        "department": "Computer Science",
+        "avatarInitials": "AM",
+        "avatarBg": "#4361ee"
+      },
+      "exchange": {
+        "teaching": "UI/UX Design",
+        "learning": "Python"
+      },
+      "date": "Sep 5, 2026",
+      "status": "Pending",
+      "statusClass": "status-pending"
+    },
+    {
+      "id": 2,
+      "partner": {
+        "name": "Aarav Singh",
+        "department": "Mass Communication",
+        "avatarInitials": "AS",
+        "avatarBg": "#ec4899"
+      },
+      "exchange": {
+        "teaching": "React",
+        "learning": "Photography"
+      },
+      "date": "Sep 4, 2026",
+      "status": "Pending",
+      "statusClass": "status-pending"
+    },
+    {
+      "id": 3,
+      "partner": {
+        "name": "Meera Patel",
+        "department": "Foreign Languages",
+        "avatarInitials": "MP",
+        "avatarBg": "#0ea5e9"
+      },
+      "exchange": {
+        "teaching": "Web Development",
+        "learning": "Spanish"
+      },
+      "date": "Sep 3, 2026",
+      "status": "Pending",
+      "statusClass": "status-pending"
+    },
+    {
+      "id": 4,
+      "partner": {
+        "name": "Priya Sharma",
+        "department": "Design",
+        "avatarInitials": "PS",
+        "avatarBg": "#7c3aed"
+      },
+      "exchange": {
+        "teaching": "Python",
+        "learning": "Figma"
+      },
+      "date": "Aug 28, 2026",
+      "status": "Accepted",
+      "statusClass": "status-confirmed"
+    },
+    {
+      "id": 5,
+      "partner": {
+        "name": "Rohan Desai",
+        "department": "Information Technology",
+        "avatarInitials": "RD",
+        "avatarBg": "#14b8a6"
+      },
+      "exchange": {
+        "teaching": "Photography",
+        "learning": "React"
+      },
+      "date": "Aug 25, 2026",
+      "status": "Accepted",
+      "statusClass": "status-confirmed"
+    },
+    {
+      "id": 6,
+      "partner": {
+        "name": "Kavya Nair",
+        "department": "Design",
+        "avatarInitials": "KN",
+        "avatarBg": "#4361ee"
+      },
+      "exchange": {
+        "teaching": "JavaScript",
+        "learning": "UI/UX Design"
+      },
+      "date": "Aug 10, 2026",
+      "status": "Completed",
+      "statusClass": "status-completed"
+    },
+    {
+      "id": 7,
+      "partner": {
+        "name": "Vikram Joshi",
+        "department": "Business",
+        "avatarInitials": "VJ",
+        "avatarBg": "#14b8a6"
+      },
+      "exchange": {
+        "teaching": "Data Analysis",
+        "learning": "Public Speaking"
+      },
+      "date": "Jul 22, 2026",
+      "status": "Completed",
+      "statusClass": "status-completed"
+    },
+    {
+      "id": 8,
+      "partner": {
+        "name": "Neha Gupta",
+        "department": "Information Technology",
+        "avatarInitials": "NG",
+        "avatarBg": "#7c3aed"
+      },
+      "exchange": {
+        "teaching": "Graphic Design",
+        "learning": "Python"
+      },
+      "date": "Jul 15, 2026",
+      "status": "Completed",
+      "statusClass": "status-completed"
+    },
+    {
+      "id": 9,
+      "partner": {
+        "name": "Li Wei",
+        "department": "Foreign Languages",
+        "avatarInitials": "LW",
+        "avatarBg": "#ec4899"
+      },
+      "exchange": {
+        "teaching": "HTML/CSS",
+        "learning": "Mandarin"
+      },
+      "date": "Jul 1, 2026",
+      "status": "Completed",
+      "statusClass": "status-completed"
+    },
+    {
+      "id": 10,
+      "partner": {
+        "name": "Aria Johnson",
+        "department": "Business Administration",
+        "avatarInitials": "AJ",
+        "avatarBg": "#0ea5e9"
+      },
+      "exchange": {
+        "teaching": "Python",
+        "learning": "Presentation Skills"
+      },
+      "date": "Aug 18, 2026",
+      "status": "Declined",
+      "statusClass": "status-declined"
+    }
+  ]
+}
+

@@ -1,0 +1,177 @@
+{
+  "pageHeader": {
+    "title": "Explore Skills",
+    "subtitle": "Discover skills offered by students across campus and find your next learning opportunity."
+  },
+  "searchPlaceholder": "Search for a skill...",
+  "categories": [
+    "All",
+    "Programming",
+    "Design",
+    "Marketing",
+    "Business",
+    "Communication",
+    "Languages",
+    "Academics",
+    "Creative"
+  ],
+  "skills": [
+    {
+      "id": 1,
+      "title": "Python",
+      "image": "images/skill-python.jpg",
+      "alt": "Python Programming",
+      "category": "Programming",
+      "categoryClass": "badge-programming",
+      "difficulty": "Beginner",
+      "description": "Learn Python fundamentals, problem solving, and practical coding habits.",
+      "teacher": "Arjun Mehta",
+      "mentorCount": 12,
+      "detailUrl": "skill-details.html"
+    },
+    {
+      "id": 2,
+      "title": "Java",
+      "image": "images/skill-java.jpg",
+      "alt": "Java Programming",
+      "category": "Programming",
+      "categoryClass": "badge-programming",
+      "difficulty": "Intermediate",
+      "description": "Build strong OOP foundations and solve real coding problems with Java.",
+      "teacher": "Rohan Desai",
+      "mentorCount": 9,
+      "detailUrl": "skill-details.html"
+    },
+    {
+      "id": 3,
+      "title": "Web Development",
+      "image": "images/skill-web-dev.jpg",
+      "alt": "Web Development",
+      "category": "Programming",
+      "categoryClass": "badge-programming",
+      "difficulty": "Beginner",
+      "description": "Create responsive websites with HTML, CSS, and modern frontend workflows.",
+      "teacher": "Neha Gupta",
+      "mentorCount": 15,
+      "detailUrl": "skill-details.html"
+    },
+    {
+      "id": 4,
+      "title": "UI/UX Design",
+      "image": "images/skill-uiux.jpg",
+      "alt": "UI/UX Design",
+      "category": "Design",
+      "categoryClass": "badge-design",
+      "difficulty": "Beginner",
+      "description": "Learn wireframes, design systems, and user-focused mobile and web layouts.",
+      "teacher": "Priya Sharma",
+      "mentorCount": 11,
+      "detailUrl": "skill-details.html"
+    },
+    {
+      "id": 5,
+      "title": "Graphic Design",
+      "image": "images/skill-graphic-design.jpg",
+      "alt": "Graphic Design",
+      "category": "Design",
+      "categoryClass": "badge-design",
+      "difficulty": "All Levels",
+      "description": "Practice branding, poster layout, and visual storytelling for digital content.",
+      "teacher": "Kavya Nair",
+      "mentorCount": 8,
+      "detailUrl": "skill-details.html"
+    },
+    {
+      "id": 6,
+      "title": "Digital Marketing",
+      "image": "images/skill-digital-marketing.jpg",
+      "alt": "Digital Marketing",
+      "category": "Marketing",
+      "categoryClass": "badge-marketing",
+      "difficulty": "Beginner",
+      "description": "Understand SEO, social media strategy, and outreach for brand growth.",
+      "teacher": "Aisha Khan",
+      "mentorCount": 10,
+      "detailUrl": "skill-details.html"
+    },
+    {
+      "id": 7,
+      "title": "Public Speaking",
+      "image": "images/skill-speaking.jpg",
+      "alt": "Public Speaking",
+      "category": "Communication",
+      "categoryClass": "badge-business",
+      "difficulty": "All Levels",
+      "description": "Improve confidence, delivery, and audience engagement through smooth speaking practice.",
+      "teacher": "Vikram Joshi",
+      "mentorCount": 7,
+      "detailUrl": "skill-details.html"
+    },
+    {
+      "id": 8,
+      "title": "Video Editing",
+      "image": "images/skill-video-editing.jpg",
+      "alt": "Video Editing",
+      "category": "Creative",
+      "categoryClass": "badge-creative",
+      "difficulty": "Beginner",
+      "description": "Cut clips, add transitions, and shape engaging stories for social and academic projects.",
+      "teacher": "Sana Verma",
+      "mentorCount": 6,
+      "detailUrl": "skill-details.html"
+    },
+    {
+      "id": 9,
+      "title": "Photography",
+      "image": "images/skill-photography.jpg",
+      "alt": "Photography",
+      "category": "Creative",
+      "categoryClass": "badge-creative",
+      "difficulty": "Beginner",
+      "description": "Learn composition, lighting, and editing for strong visual storytelling.",
+      "teacher": "Aarav Singh",
+      "mentorCount": 5,
+      "detailUrl": "skill-details.html"
+    },
+    {
+      "id": 10,
+      "title": "Excel",
+      "image": "images/skill-excel.jpg",
+      "alt": "Excel",
+      "category": "Academics",
+      "categoryClass": "badge-academics",
+      "difficulty": "Beginner",
+      "description": "Use formulas, tables, and dashboards to organize data and simplify analysis.",
+      "teacher": "Meera Patel",
+      "mentorCount": 9,
+      "detailUrl": "skill-details.html"
+    },
+    {
+      "id": 11,
+      "title": "Data Analysis",
+      "image": "images/skill-data-analysis.jpg",
+      "alt": "Data Analysis",
+      "category": "Academics",
+      "categoryClass": "badge-academics",
+      "difficulty": "Intermediate",
+      "description": "Interpret trends, summarize data, and present meaningful insights with confidence.",
+      "teacher": "Isha Kapoor",
+      "mentorCount": 4,
+      "detailUrl": "skill-details.html"
+    },
+    {
+      "id": 12,
+      "title": "Content Writing",
+      "image": "images/skill-content-writing.jpg",
+      "alt": "Content Writing",
+      "category": "Creative",
+      "categoryClass": "badge-creative",
+      "difficulty": "Beginner",
+      "description": "Write clear, engaging articles and captions that connect with real audiences.",
+      "teacher": "Nisha Shah",
+      "mentorCount": 8,
+      "detailUrl": "skill-details.html"
+    }
+  ]
+}
+

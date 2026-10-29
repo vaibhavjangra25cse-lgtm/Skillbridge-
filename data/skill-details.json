@@ -1,0 +1,71 @@
+{
+  "skill": {
+    "title": "Python Programming",
+    "category": "Programming",
+    "instructor": {
+      "name": "Arjun Mehta",
+      "details": "Computer Science, 3rd Year",
+      "avatarText": "AM",
+      "avatarClass": "mentor-avatar-placeholder blue"
+    },
+    "headerImage": {
+      "src": "images/skill-details-header.jpg",
+      "alt": "Python Programming session"
+    },
+    "about": {
+      "title": "About This Skill",
+      "paragraphs": [
+        "Python is one of the most versatile and beginner-friendly programming languages. In this peer-to-peer learning exchange, you'll learn Python from the ground up — covering fundamentals like variables, loops, and functions, then moving into real-world applications like data analysis and web scripting.",
+        "Whether you're a complete beginner or looking to strengthen your programming foundation, this skill exchange is designed to be practical and hands-on. You'll work on small projects and exercises that build your confidence step by step."
+      ]
+    },
+    "whatYoullLearn": [
+      "Python syntax, variables, data types, and operators",
+      "Control flow — if/else statements, loops, and logic",
+      "Functions, modules, and code organization",
+      "Working with lists, dictionaries, and file handling",
+      "Introduction to libraries like NumPy and Pandas",
+      "Building a small project from scratch"
+    ],
+    "availableMentors": [
+      {
+        "id": 1,
+        "name": "Arjun Mehta",
+        "bio": "Computer Science, 3rd Year · 2 years of Python experience",
+        "avatarText": "AM",
+        "avatarClass": "mentor-avatar-placeholder blue",
+        "rating": 4.8,
+        "reviews": 12
+      },
+      {
+        "id": 2,
+        "name": "Neha Gupta",
+        "bio": "Information Technology, 4th Year · Python & Django developer",
+        "avatarText": "NG",
+        "avatarClass": "mentor-avatar-placeholder green",
+        "rating": 4.7,
+        "reviews": 10
+      }
+    ],
+    "sidebar": {
+      "title": "Request to Learn",
+      "subtitle": "Send a learning request to a mentor for this skill",
+      "info": [
+        { "label": "Category", "value": "Programming" },
+        { "label": "Difficulty", "value": "Beginner Friendly" },
+        { "label": "Available Mentors", "value": "2 mentors" },
+        { "label": "Swaps Completed", "value": "12" },
+        { "label": "Avg. Duration", "value": "4–6 weeks" }
+      ],
+      "placeholder": "Hi! I'd love to learn Python. I can offer my skills in exchange...",
+      "buttonText": "Request to Learn",
+      "note": "You'll be notified when a mentor responds",
+      "wantedSwap": {
+        "icon": "🔄",
+        "title": "Looking for a Swap?",
+        "description": "Arjun is looking to learn Graphic Design in exchange for teaching Python. If you know design, this could be a perfect match!"
+      }
+    }
+  }
+}
+
