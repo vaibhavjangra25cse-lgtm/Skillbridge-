@@ -120,7 +120,7 @@ function renderSkillCards(skills) {
         // Skill Image
         const img = document.createElement('img');
         img.className = 'skill-card-image';
-        img.src = skill.image || 'images/hero.jpg';
+        img.src = skill.image || 'images/learning-placeholder.svg';
         img.alt = skill.alt || skill.title || 'Skill Image';
         article.append(img);
 

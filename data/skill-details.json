@@ -9,7 +9,7 @@
       "avatarClass": "mentor-avatar-placeholder blue"
     },
     "headerImage": {
-      "src": "images/skill-details-header.jpg",
+      "src": "images/learning-placeholder.svg",
       "alt": "Python Programming session"
     },
     "about": {
@@ -68,4 +68,3 @@
     }
   }
 }
-

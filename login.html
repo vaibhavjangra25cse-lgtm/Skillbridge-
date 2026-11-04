@@ -52,7 +52,30 @@
                 <h1 class="login-title">Welcome Back</h1>
                 <p class="login-subtitle">Sign in to continue your learning journey</p>
 
-                <form>
+                <section class="demo-account" aria-labelledby="demo-account-title">
+                    <div class="demo-account-heading">
+                        <div>
+                            <h2 id="demo-account-title">Viva demonstration account</h2>
+                            <p>Public sample credentials for demonstrating SkillBridge.</p>
+                        </div>
+                        <span class="demo-badge">DEMO</span>
+                    </div>
+                    <dl class="demo-credentials">
+                        <div>
+                            <dt>Email</dt>
+                            <dd><code>demo@skillbridge.test</code></dd>
+                        </div>
+                        <div>
+                            <dt>Password</dt>
+                            <dd><code>SkillBridge@123</code></dd>
+                        </div>
+                    </dl>
+                    <button type="button" class="demo-account-button" id="use-demo-account">
+                        Use Demo Account
+                    </button>
+                </section>
+
+                <form id="login-form">
 
                     <div class="form-group">
                         <label class="form-label" for="login-email">Email Address</label>

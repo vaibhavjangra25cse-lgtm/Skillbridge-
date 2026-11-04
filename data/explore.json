@@ -19,7 +19,7 @@
     {
       "id": 1,
       "title": "Python",
-      "image": "images/skill-python.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "Python Programming",
       "category": "Programming",
       "categoryClass": "badge-programming",
@@ -32,7 +32,7 @@
     {
       "id": 2,
       "title": "Java",
-      "image": "images/skill-java.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "Java Programming",
       "category": "Programming",
       "categoryClass": "badge-programming",
@@ -45,7 +45,7 @@
     {
       "id": 3,
       "title": "Web Development",
-      "image": "images/skill-web-dev.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "Web Development",
       "category": "Programming",
       "categoryClass": "badge-programming",
@@ -58,7 +58,7 @@
     {
       "id": 4,
       "title": "UI/UX Design",
-      "image": "images/skill-uiux.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "UI/UX Design",
       "category": "Design",
       "categoryClass": "badge-design",
@@ -71,7 +71,7 @@
     {
       "id": 5,
       "title": "Graphic Design",
-      "image": "images/skill-graphic-design.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "Graphic Design",
       "category": "Design",
       "categoryClass": "badge-design",
@@ -84,7 +84,7 @@
     {
       "id": 6,
       "title": "Digital Marketing",
-      "image": "images/skill-digital-marketing.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "Digital Marketing",
       "category": "Marketing",
       "categoryClass": "badge-marketing",
@@ -97,7 +97,7 @@
     {
       "id": 7,
       "title": "Public Speaking",
-      "image": "images/skill-speaking.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "Public Speaking",
       "category": "Communication",
       "categoryClass": "badge-business",
@@ -110,7 +110,7 @@
     {
       "id": 8,
       "title": "Video Editing",
-      "image": "images/skill-video-editing.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "Video Editing",
       "category": "Creative",
       "categoryClass": "badge-creative",
@@ -123,7 +123,7 @@
     {
       "id": 9,
       "title": "Photography",
-      "image": "images/skill-photography.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "Photography",
       "category": "Creative",
       "categoryClass": "badge-creative",
@@ -136,7 +136,7 @@
     {
       "id": 10,
       "title": "Excel",
-      "image": "images/skill-excel.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "Excel",
       "category": "Academics",
       "categoryClass": "badge-academics",
@@ -149,7 +149,7 @@
     {
       "id": 11,
       "title": "Data Analysis",
-      "image": "images/skill-data-analysis.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "Data Analysis",
       "category": "Academics",
       "categoryClass": "badge-academics",
@@ -162,7 +162,7 @@
     {
       "id": 12,
       "title": "Content Writing",
-      "image": "images/skill-content-writing.jpg",
+      "image": "images/learning-placeholder.svg",
       "alt": "Content Writing",
       "category": "Creative",
       "categoryClass": "badge-creative",
@@ -174,4 +174,3 @@
     }
   ]
 }
-

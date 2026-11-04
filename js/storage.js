@@ -12,7 +12,19 @@ const SB_KEYS = {
     FEEDBACK: 'sb_feedback',
     MENTORS: 'sb_mentors',
     MIGRATED: 'sb_data_migrated',
+    DEMO_SEEDED: 'sb_demo_data_seeded',
 };
+
+const SB_DEMO_ACCOUNT = Object.freeze({
+    email: 'demo@skillbridge.test',
+    password: 'SkillBridge@123',
+    firstName: 'Demo',
+    lastName: 'Student',
+    department: 'Computer Science',
+    year: '3rd Year',
+});
+
+let sbDemoInitialization = null;
 
 function sbGet(key, fallback = []) {
     try {
@@ -267,6 +279,204 @@ async function sbLoadMentors() {
     return data.mentors;
 }
 
+function sbInitializeDemoData() {
+    if (!sbDemoInitialization) {
+        sbDemoInitialization = sbSeedDemoData().catch(error => {
+            sbDemoInitialization = null;
+            throw error;
+        });
+    }
+    return sbDemoInitialization;
+}
+
+async function sbSeedDemoData() {
+    sbMigrateExistingData();
+    await sbLoadMentors();
+
+    const users = sbGetUsers();
+    let demoUser = users.find(user => user.email?.toLowerCase() === SB_DEMO_ACCOUNT.email);
+    const passwordHash = await sbHashPassword(SB_DEMO_ACCOUNT.password);
+    if (demoUser) {
+        Object.assign(demoUser, {
+            firstName: SB_DEMO_ACCOUNT.firstName,
+            lastName: SB_DEMO_ACCOUNT.lastName,
+            department: SB_DEMO_ACCOUNT.department,
+            year: SB_DEMO_ACCOUNT.year,
+            passwordHash,
+        });
+    } else {
+        demoUser = {
+            id: 'sb-demo-student',
+            email: SB_DEMO_ACCOUNT.email,
+            firstName: SB_DEMO_ACCOUNT.firstName,
+            lastName: SB_DEMO_ACCOUNT.lastName,
+            department: SB_DEMO_ACCOUNT.department,
+            year: SB_DEMO_ACCOUNT.year,
+            passwordHash,
+            createdAt: new Date().toISOString(),
+        };
+        users.push(demoUser);
+    }
+    sbSet(SB_KEYS.USERS, users);
+
+    if (sbGet(SB_KEYS.DEMO_SEEDED, false)) return demoUser;
+
+    const now = Date.now();
+    const requestSamples = [
+        {
+            requestId: 'demo-request-python-pending',
+            studentId: demoUser.id,
+            studentName: `${demoUser.firstName} ${demoUser.lastName}`,
+            studentEmail: demoUser.email,
+            skillId: 1,
+            skillName: 'Python',
+            description: 'I know basic syntax and would like to practice data analysis with pandas.',
+            mentorId: 1,
+            mentorName: 'Arjun Mehta',
+            status: 'Pending',
+            daysAgo: 1,
+        },
+        {
+            requestId: 'demo-request-design-accepted',
+            studentId: demoUser.id,
+            studentName: `${demoUser.firstName} ${demoUser.lastName}`,
+            studentEmail: demoUser.email,
+            skillId: 4,
+            skillName: 'UI/UX Design',
+            description: 'I would like feedback on a mobile app prototype and help learning Figma.',
+            mentorId: 2,
+            mentorName: 'Priya Sharma',
+            status: 'Accepted',
+            daysAgo: 4,
+        },
+        {
+            requestId: 'demo-request-react-completed',
+            studentId: demoUser.id,
+            studentName: `${demoUser.firstName} ${demoUser.lastName}`,
+            studentEmail: demoUser.email,
+            skillId: 3,
+            skillName: 'React',
+            description: 'I wanted to build a reusable component and understand React state.',
+            mentorId: 3,
+            mentorName: 'Rohan Desai',
+            status: 'Completed',
+            daysAgo: 12,
+        },
+        {
+            requestId: 'demo-request-spanish-rejected',
+            studentId: demoUser.id,
+            studentName: `${demoUser.firstName} ${demoUser.lastName}`,
+            studentEmail: demoUser.email,
+            skillId: 10,
+            skillName: 'Spanish',
+            description: 'I am looking for a beginner conversation practice session.',
+            mentorId: 5,
+            mentorName: 'Meera Patel',
+            status: 'Rejected',
+            daysAgo: 18,
+        },
+        {
+            requestId: 'demo-request-analysis-pending',
+            studentId: demoUser.id,
+            studentName: `${demoUser.firstName} ${demoUser.lastName}`,
+            studentEmail: demoUser.email,
+            skillId: 11,
+            skillName: 'Data Analysis',
+            description: 'I would like to learn how to clean and visualize a small dataset.',
+            mentorId: 8,
+            mentorName: 'Sana Verma',
+            status: 'Pending',
+            daysAgo: 2,
+        },
+        {
+            requestId: 'demo-request-maya-python',
+            studentId: 'demo-student-maya',
+            studentName: 'Maya Chen',
+            studentEmail: 'maya.chen@example.test',
+            skillId: 1,
+            skillName: 'Python',
+            description: 'Could you help me write my first data-cleaning script?',
+            mentorId: 1,
+            mentorName: 'Arjun Mehta',
+            status: 'Pending',
+            daysAgo: 1,
+        },
+        {
+            requestId: 'demo-request-leo-design',
+            studentId: 'demo-student-leo',
+            studentName: 'Leo Martinez',
+            studentEmail: 'leo.martinez@example.test',
+            skillId: 4,
+            skillName: 'UI/UX Design',
+            description: 'I would appreciate a review of my first mobile wireframes.',
+            mentorId: 2,
+            mentorName: 'Priya Sharma',
+            status: 'Pending',
+            daysAgo: 3,
+        },
+    ].map(({ daysAgo, ...request }) => {
+        const createdAt = new Date(now - daysAgo * 24 * 60 * 60 * 1000).toISOString();
+        return { ...request, createdAt, updatedAt: createdAt };
+    });
+
+    const requests = sbGetRequests();
+    const existingRequestIds = new Set(requests.map(request => request.requestId));
+    sbSet(SB_KEYS.REQUESTS, [
+        ...requestSamples.filter(request => !existingRequestIds.has(request.requestId)),
+        ...requests,
+    ]);
+
+    const feedbackSamples = [
+        {
+            feedbackId: 'demo-feedback-student',
+            userId: demoUser.id,
+            name: 'Demo Student',
+            email: SB_DEMO_ACCOUNT.email,
+            category: 'Skills and Learning',
+            rating: 5,
+            liked: 'The mentor profiles made it easy to find practical help.',
+            improvement: 'More beginner-friendly project examples would be useful.',
+            comments: 'I completed my first small React component.',
+            recommendation: 'Yes',
+        },
+        {
+            feedbackId: 'demo-feedback-maya',
+            userId: 'demo-student-maya',
+            name: 'Maya Chen',
+            email: 'maya.chen@example.test',
+            category: 'Mentorship',
+            rating: 4,
+            liked: 'The learning requests are easy to follow.',
+            improvement: 'It would be helpful to add session scheduling.',
+            comments: 'Looking forward to my Python session.',
+            recommendation: 'Yes',
+        },
+        {
+            feedbackId: 'demo-feedback-leo',
+            userId: 'demo-student-leo',
+            name: 'Leo Martinez',
+            email: 'leo.martinez@example.test',
+            category: 'User Experience',
+            rating: 4,
+            liked: 'The skill categories are clear.',
+            improvement: 'I would like to see more design mentors.',
+            comments: 'The prototype works well on my laptop.',
+            recommendation: 'Maybe',
+        },
+    ].map(feedback => ({
+        ...feedback,
+        submittedAt: new Date(now - 5 * 24 * 60 * 60 * 1000).toISOString(),
+    }));
+    const feedback = sbGetFeedback();
+    const existingFeedbackIds = new Set(feedback.map(entry => entry.feedbackId));
+    sbSet(SB_KEYS.FEEDBACK, [
+        ...feedbackSamples.filter(entry => !existingFeedbackIds.has(entry.feedbackId)),
+        ...feedback,
+    ]);
+    sbSet(SB_KEYS.DEMO_SEEDED, true);
+    return demoUser;
+}
+
 function sbMigrateExistingData() {
     if (sbGet(SB_KEYS.MIGRATED, false)) return;
 
@@ -346,6 +556,8 @@ function sbUpdateNavbar() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    sbMigrateExistingData();
     sbUpdateNavbar();
+    sbInitializeDemoData().catch(error => {
+        console.error('Unable to initialize SkillBridge demo data:', error);
+    });
 });

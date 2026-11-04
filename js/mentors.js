@@ -170,7 +170,7 @@ function renderMentors(mentors) {
         // Avatar
         if (mentor.avatar && mentor.avatar.type === 'image') {
             const img = document.createElement('img');
-            img.src = mentor.avatar.src || 'images/hero.jpg';
+            img.src = mentor.avatar.src || 'images/learning-placeholder.svg';
             img.alt = mentor.avatar.alt || mentor.name;
             img.className = mentor.avatar.className || 'mentor-avatar';
             article.append(img);
