@@ -35,12 +35,21 @@ async function loadSkillDetails() {
             throw new Error('Skill detail record not found.');
         }
 
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('skill')) skill.title = params.get('skill');
+        if (params.get('category')) skill.category = params.get('category');
+        try {
+            await sbLoadMentors();
+        } catch (mentorError) {
+            console.error('Unable to load mentor directory for request assignment:', mentorError);
+        }
+
         renderHeader(skill);
         renderAbout(skill.about);
         renderChecklist(skill.whatYoullLearn);
         renderMentors(skill.availableMentors);
         renderSidebar(skill.sidebar);
-        setupFormInteraction();
+        setupFormInteraction(skill);
 
     } catch (error) {
         console.error('Error loading skill details:', error);
@@ -217,32 +226,81 @@ function renderSidebar(sidebar) {
     }
 }
 
-function setupFormInteraction() {
-    const form = document.querySelector('.sidebar-card form');
+function setupFormInteraction(skill = null) {
+    const form = document.getElementById('skill-request-form');
     const textarea = document.querySelector('.sidebar-textarea');
-    const button = form ? form.querySelector('button') : null;
+    const button = form ? form.querySelector('button[type="submit"]') : null;
+    const mentorSelect = document.getElementById('request-mentor');
+    const note = document.querySelector('.sidebar-note');
 
-    if (!form || !button || !textarea) return;
+    if (!form || !button || !textarea || !mentorSelect) return;
 
-    button.addEventListener('click', (e) => {
-        e.preventDefault();
-        const value = textarea.value.trim();
-        if (!value) {
-            textarea.style.borderColor = '#ef4444';
-            textarea.focus();
+    const mentors = skill && Array.isArray(skill.availableMentors)
+        ? skill.availableMentors
+        : [...document.querySelectorAll('.detail-mentors .mentor-name')].map((nameElement, index) => ({
+            id: index + 1,
+            name: nameElement.textContent.trim(),
+        }));
+    mentorSelect.textContent = '';
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Select a mentor';
+    mentorSelect.append(placeholder);
+    mentors.forEach(mentor => {
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = mentor.name;
+        option.dataset.mentorName = mentor.name;
+        const matchingMentor = sbGetMentors().find(item => item.name === mentor.name);
+        if (matchingMentor) option.value = String(matchingMentor.id);
+        mentorSelect.append(option);
+    });
+
+    form.addEventListener('submit', event => {
+        event.preventDefault();
+        if (!sbGetCurrentUser()) {
+            window.alert('Please sign in before submitting a learning request.');
+            window.location.href = 'login.html';
             return;
         }
 
-        textarea.style.borderColor = '#22c55e';
-        button.textContent = 'Request Sent! ✓';
-        button.disabled = true;
-        button.style.backgroundColor = '#16a34a';
+        const value = textarea.value.trim();
+        const selectedOption = mentorSelect.selectedOptions[0];
+        if (!selectedOption || !selectedOption.dataset.mentorName) {
+            mentorSelect.focus();
+            if (note) note.textContent = 'Please choose a mentor for this request.';
+            return;
+        }
+        if (!value) {
+            textarea.focus();
+            if (note) note.textContent = 'Please describe what you would like to learn.';
+            return;
+        }
+        if (button.disabled) return;
 
-        const note = document.querySelector('.sidebar-note');
-        if (note) {
-            note.textContent = 'Your request has been submitted to available mentors!';
-            note.style.color = '#16a34a';
-            note.style.fontWeight = '600';
+        button.disabled = true;
+        const params = new URLSearchParams(window.location.search);
+        try {
+            const result = sbCreateRequest({
+                skillId: params.get('skillId'),
+                skillName: document.querySelector('.detail-title')?.textContent.trim() || 'Skill',
+                description: value,
+                mentorId: selectedOption.value || null,
+                mentorName: selectedOption.dataset.mentorName,
+            });
+            if (!result.ok) {
+                button.disabled = false;
+                if (note) note.textContent = result.error;
+                return;
+            }
+
+            form.reset();
+            button.textContent = 'Request Sent ✓';
+            if (note) note.textContent = 'Your request was saved in this browser. You can track its status on the Requests page.';
+        } catch (error) {
+            button.disabled = false;
+            console.error('Unable to save learning request:', error);
+            if (note) note.textContent = error.message || 'Unable to save your request. Please try again.';
         }
     });
 }
@@ -297,4 +355,3 @@ function showFileProtocolBanner() {
 
     document.body.style.paddingTop = '48px';
 }
-

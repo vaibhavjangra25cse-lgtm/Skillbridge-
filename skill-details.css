@@ -398,6 +398,23 @@ img {
     color: #2d3436;
 }
 
+.sidebar-card form label {
+    display: block;
+    margin: 0 0 6px;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.sidebar-mentor-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 14px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    font: inherit;
+}
+
 .sidebar-textarea {
     width: 100%;
     padding: 12px;

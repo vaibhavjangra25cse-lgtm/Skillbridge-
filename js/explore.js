@@ -34,6 +34,11 @@ async function loadExploreData() {
         }
 
         const data = await response.json();
+        try {
+            await sbLoadMentors();
+        } catch (mentorError) {
+            console.error('Unable to load mentors for request assignment:', mentorError);
+        }
 
         // Update header if present
         if (data.pageHeader) {
@@ -162,10 +167,54 @@ function renderSkillCards(skills) {
 
         const link = document.createElement('a');
         link.className = 'card-link';
-        link.href = skill.detailUrl || 'skill-details.html';
+        const detailUrl = new URL(skill.detailUrl || 'skill-details.html', window.location.href);
+        if (skill.id !== undefined) detailUrl.searchParams.set('skillId', skill.id);
+        if (skill.title) detailUrl.searchParams.set('skill', skill.title);
+        if (skill.category) detailUrl.searchParams.set('category', skill.category);
+        link.href = detailUrl.href;
         link.textContent = 'Explore Skill';
 
-        footer.append(countSpan, link);
+        const requestButton = document.createElement('button');
+        requestButton.type = 'button';
+        requestButton.className = 'card-link request-skill-button';
+        requestButton.textContent = 'Request to Learn';
+        requestButton.addEventListener('click', () => {
+            if (!sbGetCurrentUser()) {
+                window.alert('Please sign in before submitting a learning request.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const description = window.prompt(`What would you like to learn about ${skill.title}?`);
+            if (description === null) return;
+            if (!description.trim()) {
+                window.alert('Please describe what you would like to learn.');
+                return;
+            }
+
+            requestButton.disabled = true;
+            try {
+                const result = sbCreateRequest({
+                    skillId: skill.id,
+                    skillName: skill.title,
+                    description,
+                    mentorName: skill.teacher || '',
+                });
+                if (!result.ok) {
+                    requestButton.disabled = false;
+                    window.alert(result.error);
+                    return;
+                }
+                requestButton.textContent = 'Request Sent';
+                window.alert('Your learning request has been saved. You can track it on the Requests page.');
+            } catch (error) {
+                requestButton.disabled = false;
+                console.error('Unable to save learning request:', error);
+                window.alert(error.message || 'Unable to save your request. Please try again.');
+            }
+        });
+
+        footer.append(countSpan, requestButton, link);
 
         body.append(meta, title, desc, teacher, footer);
         article.append(body);
@@ -246,4 +295,3 @@ function showFileProtocolBanner() {
     // Push main content down so banner doesn't overlap navbar
     document.body.style.paddingTop = '48px';
 }
-

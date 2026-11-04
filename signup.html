@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="signup.css">
+    <script src="js/storage.js" defer></script>
     <script src="js/signup.js" defer></script>
 </head>
 <body>
@@ -51,30 +52,30 @@
                 <h1 class="signup-title">Join SkillBridge</h1>
                 <p class="signup-subtitle">Start learning and sharing your skills with fellow students.</p>
 
-                <form action="index.html" method="get">
+                <form>
 
                     <!-- First Name + Last Name side by side -->
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label" for="signup-firstname">First Name</label>
-                            <input type="text" id="signup-firstname" class="form-input" placeholder="First name">
+                            <input type="text" id="signup-firstname" class="form-input" placeholder="First name" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="signup-lastname">Last Name</label>
-                            <input type="text" id="signup-lastname" class="form-input" placeholder="Last name">
+                            <input type="text" id="signup-lastname" class="form-input" placeholder="Last name" required>
                         </div>
                     </div>
 
                     <!-- College Email -->
                     <div class="form-group">
                         <label class="form-label" for="signup-email">College Email</label>
-                        <input type="email" id="signup-email" class="form-input" placeholder="you@college.edu">
+                        <input type="email" id="signup-email" class="form-input" placeholder="you@college.edu" required>
                     </div>
 
                     <!-- Department -->
                     <div class="form-group">
                         <label class="form-label" for="signup-department">Department</label>
-                        <select id="signup-department" class="form-input">
+                        <select id="signup-department" class="form-input" required>
                             <option value="">Select your department</option>
                             <option>Computer Science</option>
                             <option>Information Technology</option>
@@ -89,7 +90,7 @@
                     <!-- Year / Semester -->
                     <div class="form-group">
                         <label class="form-label" for="signup-year">Year / Semester</label>
-                        <select id="signup-year" class="form-input">
+                        <select id="signup-year" class="form-input" required>
                             <option value="">Select your year</option>
                             <option>1st Year</option>
                             <option>2nd Year</option>
@@ -102,19 +103,19 @@
                     <!-- Password -->
                     <div class="form-group">
                         <label class="form-label" for="signup-password">Password</label>
-                        <input type="password" id="signup-password" class="form-input" placeholder="Create a password">
+                        <input type="password" id="signup-password" class="form-input" placeholder="Create a password" required>
                     </div>
 
                     <!-- Confirm Password -->
                     <div class="form-group">
                         <label class="form-label" for="signup-confirm">Confirm Password</label>
-                        <input type="password" id="signup-confirm" class="form-input" placeholder="Confirm your password">
+                        <input type="password" id="signup-confirm" class="form-input" placeholder="Confirm your password" required>
                     </div>
 
                     <!-- Create Account button — navigates to home -->
-                    <a href="index.html" class="form-btn">Create Account</a>
+                    <button type="submit" class="form-btn">Create Account</button>
 
-                    <p class="signup-terms">By creating an account, you agree to our Terms of Service.</p>
+                    <p class="signup-terms">This frontend demo saves your account in this browser only. Do not reuse a sensitive password.</p>
 
                 </form>
 

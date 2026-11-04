@@ -73,7 +73,7 @@
     "submitButton": {
       "text": "Create Account"
     },
-    "terms": "By creating an account, you agree to our Terms of Service.",
+    "terms": "This frontend demo saves your account in this browser only. Do not reuse a sensitive password.",
     "footer": {
       "prompt": "Already have an account?",
       "linkText": "Sign In →",
@@ -81,4 +81,3 @@
     }
   }
 }
-

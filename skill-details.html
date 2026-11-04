@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="skill-details.css">
+    <script src="js/storage.js" defer></script>
     <script src="js/skill-details.js" defer></script>
 </head>
 <body>
@@ -169,11 +170,16 @@
                             </div>
                         </div>
 
-                        <form>
-                            <textarea class="sidebar-textarea" placeholder="Hi! I'd love to learn Python. I can offer my skills in exchange..."></textarea>
-                            <button type="button" class="btn btn-primary" style="width: 100%;">Request to Learn</button>
+                        <form id="skill-request-form">
+                            <label for="request-mentor">Choose a mentor</label>
+                            <select class="sidebar-mentor-select" id="request-mentor" required>
+                                <option value="">Loading mentors...</option>
+                            </select>
+                            <label for="request-description">What would you like to learn?</label>
+                            <textarea id="request-description" class="sidebar-textarea" placeholder="Hi! I'd love to learn Python. I can offer my skills in exchange..." required></textarea>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Request to Learn</button>
                         </form>
-                        <p class="sidebar-note">You'll be notified when a mentor responds</p>
+                        <p class="sidebar-note" aria-live="polite">You'll be notified when a mentor responds</p>
                     </div>
 
                     <!-- Wanted Swap Callout -->

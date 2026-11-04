@@ -13,6 +13,13 @@ let isSubmitting = false;
 document.addEventListener('DOMContentLoaded', () => {
     // Setup form event listeners immediately so validation and preventDefault are active
     setupFormInteractions();
+    const user = sbGetCurrentUser();
+    if (user) {
+        const name = document.getElementById('feedback-name');
+        const email = document.getElementById('feedback-email');
+        if (name && !name.value) name.value = `${user.firstName} ${user.lastName}`.trim();
+        if (email && !email.value) email.value = user.email;
+    }
 
     if (window.location.protocol === 'file:') {
         showFileProtocolBanner();
@@ -383,7 +390,7 @@ async function handleFormSubmit(e) {
         return;
     }
 
-    // Form is valid. Begin async submission process
+    // Saving is local to this browser; no backend request is made.
     isSubmitting = true;
     const submitBtn = document.getElementById('btn-submit-feedback');
     const originalBtnText = submitBtn ? submitBtn.textContent : 'Submit Feedback';
@@ -399,20 +406,27 @@ async function handleFormSubmit(e) {
     clearAlert();
 
     try {
-        // Simulate realistic frontend async processing
-        await new Promise(resolve => setTimeout(resolve, 600));
-
-        // NOTICE: SkillBridge is a static frontend project with no backend server.
-        // As strictly required: we do not pretend it was saved to a database,
-        // and clearly inform the user with a Frontend Demonstration Notice.
-        const noticeTitle = (feedbackConfig && feedbackConfig.form && feedbackConfig.form.messages &&
-            feedbackConfig.form.messages.demoNoticeTitle) || 'Frontend Demonstration Only';
-
-        const noticeBody = (feedbackConfig && feedbackConfig.form && feedbackConfig.form.messages &&
-            feedbackConfig.form.messages.demoNoticeBody) ||
-            'Form validation passed! SkillBridge currently runs as a frontend static application with no backend server or database connected. Your feedback was validated successfully on the client side, but has not been sent or stored anywhere.';
-
-        showAlert('demo-success', noticeTitle, noticeBody);
+        const entry = {
+            name: document.getElementById('feedback-name').value.trim(),
+            email: document.getElementById('feedback-email').value.trim(),
+            category: document.getElementById('feedback-category').value,
+            rating: Number(document.querySelector('.star-rating input[type="radio"]:checked').value),
+            liked: document.getElementById('feedback-like').value.trim(),
+            improvement: document.getElementById('feedback-improve').value.trim(),
+            comments: document.getElementById('feedback-comments').value.trim(),
+            recommendation: document.querySelector('input[name="recommendation"]:checked')?.value || '',
+        };
+        sbSaveFeedback(entry);
+        document.getElementById('feedback-form').reset();
+        clearAllErrors();
+        document.querySelectorAll('.recommend-option').forEach(option => option.classList.remove('selected'));
+        const ratingDescription = document.getElementById('rating-desc');
+        if (ratingDescription) ratingDescription.textContent = 'Select a rating';
+        showAlert(
+            'demo-success',
+            'Feedback saved',
+            'Your feedback was saved in this browser. It has not been sent to a backend or shared across devices.'
+        );
 
         // Scroll to top of the card smoothly
         const alertArea = document.getElementById('feedback-alert-container');
@@ -422,7 +436,7 @@ async function handleFormSubmit(e) {
 
     } catch (err) {
         console.error('Submission processing error:', err);
-        showAlert('error', 'Submission Error', 'An unexpected error occurred while processing the form. Please try again.');
+        showAlert('error', 'Submission Error', err.message || 'Unable to save feedback. Please try again.');
     } finally {
         isSubmitting = false;
         if (submitBtn) {

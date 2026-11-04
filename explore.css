@@ -414,6 +414,20 @@ img {
     color: #1D4ED8;
 }
 
+.request-skill-button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.request-skill-button:disabled {
+    color: #16a34a;
+    cursor: default;
+}
+
 /* Footer */
 .footer {
     background-color: #1a1a2e;

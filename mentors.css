@@ -625,3 +625,88 @@ img {
         width: 100%;
     }
 }
+
+.mentor-requests-section {
+    padding: 28px 0;
+    background: #f8fafc;
+}
+
+.mentor-requests-section .section-heading p {
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.mentor-request-filter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 18px 0;
+}
+
+.mentor-request-filter label {
+    font-weight: 600;
+}
+
+.mentor-request-list {
+    display: grid;
+    gap: 12px;
+}
+
+.mentor-request-card {
+    padding: 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.mentor-request-card h3 {
+    margin-bottom: 4px;
+    color: #1e293b;
+}
+
+.mentor-request-card .status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.mentor-request-card .status-pending {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.mentor-request-card .status-confirmed {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.mentor-request-card .status-declined {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.mentor-request-card .status-completed {
+    background: #f0fdf4;
+    color: #15803d;
+}
+
+.mentor-request-date,
+.mentor-request-card > p {
+    margin-bottom: 8px;
+    color: #64748b;
+}
+
+.mentor-request-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.mentor-request-empty {
+    padding: 18px;
+    color: #64748b;
+}

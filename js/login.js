@@ -95,14 +95,13 @@ function applyLoginConfig(data) {
 
 function setupLoginFormValidation() {
     const form = document.querySelector('.login-card form');
-    const submitLink = document.querySelector('.login-card .form-btn');
+    const submitButton = document.querySelector('.login-card .form-btn');
     const emailInput = document.getElementById('login-email');
     const passwordInput = document.getElementById('login-password');
 
-    if (!form || !submitLink || !emailInput || !passwordInput) return;
+    if (!form || !submitButton || !emailInput || !passwordInput) return;
 
-    // Convert link to button behavior or intercept click
-    submitLink.addEventListener('click', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         clearMessages();
 
@@ -128,21 +127,21 @@ function setupLoginFormValidation() {
             return;
         }
 
-        if (password.length < 6) {
-            showFeedback('Password must be at least 6 characters long.', 'error');
-            passwordInput.focus();
-            return;
-        }
-
-        // Success state simulation
-        showFeedback('Signing in...', 'success');
-        submitLink.textContent = 'Signing In...';
-        submitLink.style.pointerEvents = 'none';
-        submitLink.style.opacity = '0.7';
-
-        setTimeout(() => {
+        submitButton.disabled = true;
+        try {
+            const result = await sbLogin(email, password);
+            if (!result.ok) {
+                showFeedback(result.error, 'error');
+                return;
+            }
+            showFeedback('Signed in successfully. Redirecting...', 'success');
             window.location.href = 'index.html';
-        }, 600);
+        } catch (error) {
+            console.error('Unable to sign in:', error);
+            showFeedback(error.message || 'Unable to sign in. Please try again.', 'error');
+        } finally {
+            submitButton.disabled = false;
+        }
     });
 }
 
@@ -217,4 +216,3 @@ function showFileProtocolBanner() {
 
     document.body.style.paddingTop = '48px';
 }
-

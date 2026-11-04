@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login.css">
+    <script src="js/storage.js" defer></script>
     <script src="js/login.js" defer></script>
 </head>
 <body>
@@ -51,19 +52,19 @@
                 <h1 class="login-title">Welcome Back</h1>
                 <p class="login-subtitle">Sign in to continue your learning journey</p>
 
-                <form action="index.html" method="get">
+                <form>
 
                     <div class="form-group">
                         <label class="form-label" for="login-email">Email Address</label>
-                        <input type="email" id="login-email" class="form-input" placeholder="you@college.edu">
+                        <input type="email" id="login-email" class="form-input" placeholder="you@college.edu" required>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="login-password">Password</label>
-                        <input type="password" id="login-password" class="form-input" placeholder="Enter your password">
+                        <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required>
                     </div>
 
-                    <a href="index.html" class="form-btn">Sign In</a>
+                    <button type="submit" class="form-btn">Sign In</button>
 
                 </form>
 

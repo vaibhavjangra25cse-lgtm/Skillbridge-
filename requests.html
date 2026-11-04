@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="View and manage your skill exchange requests on SkillBridge. Track pending, accepted, completed, and declined requests.">
+        content="View and manage your skill exchange requests on SkillBridge. Track pending, accepted, rejected, and completed requests.">
     <title>Learning Requests - SkillBridge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="requests.css">
+    <script src="js/storage.js" defer></script>
     <script src="js/requests.js" defer></script>
 </head>
 
@@ -52,20 +53,20 @@
             <div class="container">
                 <div class="summary-grid">
                     <div class="summary-card">
-                        <span class="summary-number">3</span>
+                        <span class="summary-number">0</span>
                         <span class="summary-label">Pending</span>
                     </div>
                     <div class="summary-card">
-                        <span class="summary-number">2</span>
+                        <span class="summary-number">0</span>
                         <span class="summary-label">Accepted</span>
                     </div>
                     <div class="summary-card">
-                        <span class="summary-number">4</span>
+                        <span class="summary-number">0</span>
                         <span class="summary-label">Completed</span>
                     </div>
                     <div class="summary-card">
-                        <span class="summary-number">1</span>
-                        <span class="summary-label">Declined</span>
+                        <span class="summary-number">0</span>
+                        <span class="summary-label">Rejected</span>
                     </div>
                 </div>
             </div>
@@ -78,8 +79,10 @@
                     <span class="tab-pill">Pending</span>
                     <span class="tab-pill">Accepted</span>
                     <span class="tab-pill">Completed</span>
-                    <span class="tab-pill">Declined</span>
+                    <span class="tab-pill">Rejected</span>
                 </div>
+                <label class="request-search-label" for="request-search">Search your requests</label>
+                <input id="request-search" class="request-search" type="search" placeholder="Search skill or mentor">
             </div>
         </section>
 
@@ -95,7 +98,7 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody hidden>
                         <!-- Pending Request 1 -->
                         <tr>
                             <td>

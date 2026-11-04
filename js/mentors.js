@@ -8,15 +8,31 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    sbOnStorageChange(key => {
+        if (key === SB_KEYS.REQUESTS) setupMentorRequestPanel();
+        else if (key === SB_KEYS.MENTORS) renderMentorRequests();
+    });
+    sbOnPageActive(renderMentorRequests);
     if (window.location.protocol === 'file:') {
         showFileProtocolBanner();
+        allMentors = sbGetMentors();
         setupMentorFilters();
+        setupMentorRequestPanel();
+        renderMentorRequests();
         return;
     }
     loadMentorsData();
 });
 
 let allMentors = [];
+
+const mentorSkillCategories = {
+    programming: ['python', 'java', 'javascript', 'react', 'node', 'web development'],
+    design: ['design', 'figma', 'ui/ux', 'autocad'],
+    language: ['language', 'spanish', 'french', 'mandarin'],
+    photography: ['photography', 'photo editing'],
+    business: ['business', 'finance', 'excel', 'research'],
+};
 
 async function loadMentorsData() {
     const sectionContainer = document.querySelector('.section[aria-labelledby="mentor-list-title"] .container');
@@ -41,12 +57,14 @@ async function loadMentorsData() {
         }
 
         allMentors = Array.isArray(data.mentors) ? data.mentors : [];
+        sbSetMentors(allMentors);
 
         // Setup filter listeners
         setupMentorFilters();
 
         // Render mentors
         renderMentors(allMentors);
+        setupMentorRequestPanel();
 
     } catch (error) {
         console.error('Error loading mentors data:', error);
@@ -80,19 +98,18 @@ function setupMentorFilters() {
                 mentor.teaches.toLowerCase().includes(query) ||
                 mentor.wantsToLearn.toLowerCase().includes(query);
 
-            const matchesSkill = (selectedSkill === 'Any Skill') ||
-                mentor.teaches.toLowerCase().includes(selectedSkill.toLowerCase());
+            const matchesSkill = mentorMatchesSkill(mentor, selectedSkill);
 
+            const departmentTerm = selectedDept === 'Media' ? 'mass communication' : selectedDept.toLowerCase();
             const matchesDept = (selectedDept === 'Any Department') ||
-                (mentor.department && mentor.department.toLowerCase() === selectedDept.toLowerCase()) ||
-                mentor.bio.toLowerCase().includes(selectedDept.toLowerCase());
+                (mentor.department && mentor.department.toLowerCase().includes(departmentTerm)) ||
+                mentor.bio.toLowerCase().includes(departmentTerm);
 
             const matchesYear = (selectedYear === 'Any Year') ||
                 (mentor.year && mentor.year.toLowerCase() === selectedYear.toLowerCase()) ||
                 mentor.bio.toLowerCase().includes(selectedYear.toLowerCase());
 
-            const matchesExp = (selectedExp === 'Any Experience') ||
-                mentor.experience.toLowerCase().includes(selectedExp.toLowerCase());
+            const matchesExp = mentorMatchesExperience(mentor, selectedExp);
 
             return matchesQuery && matchesSkill && matchesDept && matchesYear && matchesExp;
         });
@@ -106,6 +123,28 @@ function setupMentorFilters() {
     if (yearSelect) yearSelect.addEventListener('change', handleFilter);
     if (expSelect) expSelect.addEventListener('change', handleFilter);
     if (filterBtn) filterBtn.addEventListener('click', handleFilter);
+}
+
+function mentorMatchesSkill(mentor, selectedSkill) {
+    if (selectedSkill === 'Any Skill') return true;
+
+    const categoryTerms = mentorSkillCategories[selectedSkill.toLowerCase()];
+    const searchText = `${mentor.teaches} ${mentor.department}`.toLowerCase();
+    return (categoryTerms || [selectedSkill.toLowerCase()]).some(term => searchText.includes(term));
+}
+
+function mentorMatchesExperience(mentor, selectedExperience) {
+    if (selectedExperience === 'Any Experience') return true;
+
+    const experience = mentor.experience.toLowerCase();
+    const years = Number.parseFloat(experience);
+    if (Number.isNaN(years)) return experience.includes(selectedExperience.toLowerCase());
+
+    if (selectedExperience === 'Beginner') return years < 1;
+    if (selectedExperience === '1-2 Years') return years >= 1 && years <= 2 && !experience.includes('+');
+    if (selectedExperience === '2-3 Years') return years >= 2 && years <= 3;
+    if (selectedExperience === '3+ Years') return years >= 3;
+    return experience.includes(selectedExperience.toLowerCase());
 }
 
 function renderMentors(mentors) {
@@ -227,9 +266,42 @@ function renderMentors(mentors) {
         connectBtn.className = 'btn btn-primary btn-sm';
         connectBtn.textContent = 'Connect';
         connectBtn.addEventListener('click', () => {
-            connectBtn.textContent = 'Requested ✓';
-            connectBtn.disabled = true;
-            connectBtn.style.opacity = '0.8';
+            if (!sbGetCurrentUser()) {
+                window.alert('Please sign in before connecting with a mentor.');
+                window.location.href = 'login.html';
+                return;
+            }
+            const skillName = window.prompt(`What would you like to learn from ${mentor.name}?`);
+            if (skillName === null) return;
+            if (!skillName.trim()) {
+                window.alert('Please enter the skill you want to learn.');
+                return;
+            }
+            const description = window.prompt('Briefly describe what you would like to learn.');
+            if (description === null) return;
+            if (!description.trim()) {
+                window.alert('Please describe what you would like to learn.');
+                return;
+            }
+            try {
+                const result = sbCreateRequest({
+                    skillName,
+                    description,
+                    mentorId: mentor.id,
+                    mentorName: mentor.name,
+                });
+                if (!result.ok) {
+                    window.alert(result.error);
+                    return;
+                }
+                connectBtn.textContent = 'Request Sent ✓';
+                connectBtn.disabled = true;
+                window.alert('Your learning request has been saved. You can track it on the Requests page.');
+                renderMentorRequests();
+            } catch (error) {
+                console.error('Unable to save mentor request:', error);
+                window.alert(error.message || 'Unable to save your request. Please try again.');
+            }
         });
 
         actions.append(viewProfileBtn, connectBtn);
@@ -237,6 +309,111 @@ function renderMentors(mentors) {
         article.append(info, actions);
         sectionContainer.append(article);
     });
+}
+
+function setupMentorRequestPanel() {
+    const select = document.getElementById('active-mentor');
+    if (!select) return;
+
+    const requests = sbGetRequests();
+    const requestNames = requests.map(request => request.mentorName).filter(Boolean);
+    const names = [...new Set([...allMentors.map(mentor => mentor.name), ...requestNames])];
+    select.textContent = '';
+    names.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        option.textContent = name;
+        select.append(option);
+    });
+    if (select.dataset.bound !== 'true') {
+        select.addEventListener('change', renderMentorRequests);
+        select.dataset.bound = 'true';
+    }
+
+    const assignedName = requests.find(request => request.status === 'Pending')?.mentorName;
+    if (assignedName && names.includes(assignedName)) select.value = assignedName;
+    else if (names.length && !select.value) select.value = names[0];
+    renderMentorRequests();
+}
+
+function renderMentorRequests() {
+    const container = document.getElementById('mentor-request-list');
+    const select = document.getElementById('active-mentor');
+    if (!container || !select) return;
+
+    const selectedMentor = allMentors.find(mentor => mentor.name === select.value) ||
+        { id: null, name: select.value };
+    const incoming = sbGetRequests().filter(request =>
+        request.mentorName
+            ? request.mentorName === selectedMentor.name
+            : request.mentorId !== null && String(request.mentorId) === String(selectedMentor.id)
+    );
+    container.textContent = '';
+    if (!selectedMentor.name || incoming.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'mentor-request-empty';
+        empty.textContent = selectedMentor.name
+            ? 'There are no requests assigned to this mentor.'
+            : 'No mentor requests are available yet.';
+        container.append(empty);
+        return;
+    }
+
+    incoming.forEach(request => {
+        const card = document.createElement('article');
+        card.className = 'mentor-request-card';
+        const title = document.createElement('h3');
+        title.textContent = `${request.studentName || 'Student'} · ${request.skillName}`;
+        const date = document.createElement('p');
+        date.className = 'mentor-request-date';
+        const submittedAt = new Date(request.createdAt);
+        date.textContent = Number.isNaN(submittedAt.getTime())
+            ? ''
+            : `Submitted ${submittedAt.toLocaleDateString()}`;
+        const description = document.createElement('p');
+        description.textContent = request.description;
+        const status = document.createElement('span');
+        status.className = `status-badge ${mentorStatusClass(request.status)}`;
+        status.textContent = request.status;
+        card.append(title, date, description, status);
+
+        const actions = document.createElement('div');
+        actions.className = 'mentor-request-actions';
+        const allowedActions = request.status === 'Pending'
+            ? [['Accepted', 'Accept'], ['Rejected', 'Reject']]
+            : request.status === 'Accepted' ? [['Completed', 'Mark completed']] : [];
+        allowedActions.forEach(([statusValue, label]) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'btn btn-primary btn-sm';
+            button.textContent = label;
+            button.addEventListener('click', () => {
+                try {
+                    const result = sbUpdateRequestStatus(request.requestId, statusValue, selectedMentor);
+                    if (!result.ok) {
+                        window.alert(result.error);
+                        return;
+                    }
+                    renderMentorRequests();
+                } catch (error) {
+                    console.error('Unable to update request status:', error);
+                    window.alert(error.message || 'Unable to update this request. Please try again.');
+                }
+            });
+            actions.append(button);
+        });
+        if (allowedActions.length) card.append(actions);
+        container.append(card);
+    });
+}
+
+function mentorStatusClass(status) {
+    return {
+        Pending: 'status-pending',
+        Accepted: 'status-confirmed',
+        Rejected: 'status-declined',
+        Completed: 'status-completed',
+    }[status] || '';
 }
 
 function renderEmptyState(container) {
@@ -313,4 +490,3 @@ function showFileProtocolBanner() {
 
     document.body.style.paddingTop = '48px';
 }
-

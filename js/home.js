@@ -8,13 +8,36 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    updateRequestDashboard();
+    updateMentorCount();
+    sbOnStorageChange(key => {
+        if (key === SB_KEYS.REQUESTS) updateRequestDashboard();
+        if (key === SB_KEYS.MENTORS) updateMentorCount();
+    });
+    sbOnPageActive(updateRequestDashboard);
     if (window.location.protocol === 'file:') {
         showFileProtocolBanner();
         // Keep existing static HTML content visible
         return;
     }
+    sbLoadMentors().then(updateMentorCount).catch(error => {
+        console.error('Unable to load mentor count for the dashboard:', error);
+    });
     loadHomeData();
 });
+
+function updateRequestDashboard() {
+    const counts = sbGetRequestCounts();
+    document.querySelectorAll('[data-request-count]').forEach(counter => {
+        const key = counter.dataset.requestCount;
+        counter.textContent = String(counts[key] || 0);
+    });
+}
+
+function updateMentorCount() {
+    const counter = document.querySelector('[data-mentor-count]');
+    if (counter) counter.textContent = String(sbGetMentors().length);
+}
 
 async function loadHomeData() {
     const skillGrid = document.querySelector('.skill-grid');
@@ -297,4 +320,3 @@ function showFileProtocolBanner() {
     // Push main content down so banner doesn't overlap navbar
     document.body.style.paddingTop = '48px';
 }
-

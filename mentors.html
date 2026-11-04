@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="mentors.css">
+    <script src="js/storage.js" defer></script>
     <script src="js/mentors.js" defer></script>
 </head>
 <body>
@@ -105,6 +106,20 @@
                         <button type="button" class="filter-button">Apply Filters</button>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="mentor-requests-section" aria-labelledby="mentor-requests-title">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 id="mentor-requests-title">Incoming Learning Requests</h2>
+                    <p>Select a mentor to view only requests assigned to that mentor. This is a frontend demonstration, not an access-control boundary.</p>
+                </div>
+                <div class="mentor-request-filter">
+                    <label for="active-mentor">Mentor view</label>
+                    <select id="active-mentor" class="filter-select"></select>
+                </div>
+                <div id="mentor-request-list" class="mentor-request-list" aria-live="polite"></div>
             </div>
         </section>
 
@@ -221,7 +236,7 @@
                         <a href="mentors.html" class="btn-view-profile">View Profile</a>
                         <a href="mentors.html" class="btn btn-primary btn-sm">Connect</a>
                     </div>
-                </div>
+                </article>
 
                 <!-- Mentor Card 5 -->
                 <article class="mentor-card">

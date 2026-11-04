@@ -241,6 +241,35 @@ img {
     margin-bottom: 30px;
 }
 
+.request-search-label {
+    display: block;
+    margin: 16px 0 6px;
+    color: #475569;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.request-search {
+    width: min(420px, 100%);
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font: inherit;
+}
+
+.request-description {
+    margin: 6px 0 0;
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+.request-empty-cell,
+.requests-auth-notice {
+    padding: 20px;
+    color: #64748b;
+    text-align: center;
+}
+
 .tab-pill {
     padding: 10px 22px;
     border-radius: 50px;
@@ -517,8 +546,13 @@ img {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .request-list-section .container {
+        overflow-x: auto;
+    }
+
     .request-table {
         font-size: 12px;
+        min-width: 520px;
     }
 
     .request-table th,

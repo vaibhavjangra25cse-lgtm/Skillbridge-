@@ -117,7 +117,7 @@ function applySignupConfig(data) {
 
 function setupSignupFormValidation() {
     const form = document.querySelector('.signup-card form');
-    const submitLink = document.querySelector('.signup-card .form-btn');
+    const submitButton = document.querySelector('.signup-card .form-btn');
 
     const firstName = document.getElementById('signup-firstname');
     const lastName = document.getElementById('signup-lastname');
@@ -127,9 +127,9 @@ function setupSignupFormValidation() {
     const password = document.getElementById('signup-password');
     const confirmPassword = document.getElementById('signup-confirm');
 
-    if (!form || !submitLink) return;
+    if (!form || !submitButton) return;
 
-    submitLink.addEventListener('click', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         clearMessages();
 
@@ -145,14 +145,12 @@ function setupSignupFormValidation() {
             return;
         }
 
-        if (email) {
-            const emailVal = email.value.trim();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailVal || !emailRegex.test(emailVal)) {
-                showFeedback('Please enter a valid college email address.', 'error');
-                email.focus();
-                return;
-            }
+        const emailVal = email ? email.value.trim() : '';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailVal || !emailRegex.test(emailVal)) {
+            showFeedback('Please enter a valid college email address.', 'error');
+            email.focus();
+            return;
         }
 
         if (dept && !dept.value) {
@@ -193,15 +191,30 @@ function setupSignupFormValidation() {
             }
         }
 
-        // Success simulation
-        showFeedback('Account created successfully! Redirecting...', 'success');
-        submitLink.textContent = 'Creating Account...';
-        submitLink.style.pointerEvents = 'none';
-        submitLink.style.opacity = '0.7';
-
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 800);
+        submitButton.disabled = true;
+        try {
+            const result = await sbRegisterUser({
+                firstName: firstName.value.trim(),
+                lastName: lastName.value.trim(),
+                email: emailVal,
+                department: dept.value,
+                year: year.value,
+                password: password.value,
+            });
+            if (!result.ok) {
+                showFeedback(result.error, 'error');
+                return;
+            }
+            showFeedback('Account created. Sign in with your email and password to continue.', 'success');
+            window.setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 500);
+        } catch (error) {
+            console.error('Unable to create account:', error);
+            showFeedback(error.message || 'Unable to create your account. Please try again.', 'error');
+        } finally {
+            submitButton.disabled = false;
+        }
     });
 }
 
@@ -276,4 +289,3 @@ function showFileProtocolBanner() {
 
     document.body.style.paddingTop = '48px';
 }
-
