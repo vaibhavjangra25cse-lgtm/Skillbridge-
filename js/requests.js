@@ -1,13 +1,9 @@
-/**
- * Learning Requests page: the JSON file supplies page copy; request records
- * and status always come from the shared browser storage layer.
- */
-
 let allRequests = [];
 let activeTab = 'All Requests';
 let requestSearch = '';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await sbAuthReady;
     const tbody = document.querySelector('.request-table tbody');
     if (tbody) tbody.textContent = '';
     setupTabFilters();
@@ -20,38 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (window.location.protocol === 'file:') {
-        showFileProtocolBanner();
-        refreshRequests();
-        sbOnStorageChange(key => {
-            if (key === SB_KEYS.REQUESTS || key === SB_KEYS.MENTORS) refreshRequests();
-        });
-        sbOnPageActive(refreshRequests);
-        return;
-    }
-
     loadRequestsData();
-    sbOnStorageChange(key => {
-        if (key === SB_KEYS.REQUESTS || key === SB_KEYS.MENTORS) refreshRequests();
-    });
     sbOnPageActive(refreshRequests);
 });
 
 async function loadRequestsData() {
-    try {
-        const response = await fetch('data/requests.json');
-        if (!response.ok) throw new Error(`Failed to load requests page configuration: ${response.status} ${response.statusText}`);
-        const data = await response.json();
-        if (data.pageHeader) {
-            const title = document.querySelector('.page-title');
-            const subtitle = document.querySelector('.page-subtitle');
-            if (title && data.pageHeader.title) title.textContent = data.pageHeader.title;
-            if (subtitle && data.pageHeader.subtitle) subtitle.textContent = data.pageHeader.subtitle;
-        }
-    } catch (error) {
-        console.error('Unable to load requests page configuration:', error);
-    }
-
     try {
         await sbLoadMentors();
     } catch (error) {
@@ -72,12 +41,27 @@ function setupTabFilters() {
     });
 }
 
-function refreshRequests() {
+async function refreshRequests() {
     const user = sbGetCurrentUser();
-    allRequests = user ? sbGetRequests({ studentId: user.id }) : [];
-    updateSummaryCounters(allRequests);
-    renderAuthNotice(Boolean(user));
-    renderTableRows(filterRequests());
+    if (!user) {
+        allRequests = [];
+        updateSummaryCounters(allRequests);
+        renderAuthNotice(false);
+        renderTableRows(filterRequests());
+        return;
+    }
+
+    try {
+        allRequests = await sbGetRequests('/requests/my');
+        updateSummaryCounters(allRequests);
+        renderAuthNotice(true);
+        renderTableRows(filterRequests());
+    } catch (error) {
+        console.error('Unable to load learning requests:', error);
+        allRequests = [];
+        updateSummaryCounters(allRequests);
+        renderTableError(error.message);
+    }
 }
 
 function updateSummaryCounters(requests) {
@@ -117,7 +101,7 @@ function renderTableRows(requests) {
         cell.className = 'request-empty-cell';
         cell.textContent = sbGetCurrentUser()
             ? `No requests found for "${activeTab}". Submit a request from Explore or Skill Details to get started.`
-            : 'Sign in to see the learning requests you have submitted.';
+            : 'Sign in to view your learning requests. You can browse skills and mentors without an account.';
         row.append(cell);
         tbody.append(row);
         return;
@@ -191,9 +175,9 @@ function getStatusClass(status) {
     return classes[status] || '';
 }
 
-function renderAuthNotice(isSignedIn) {
+function renderAuthNotice(hasRequestIdentity) {
     let notice = document.getElementById('requests-auth-notice');
-    if (isSignedIn) {
+    if (hasRequestIdentity) {
         notice?.remove();
         return;
     }
@@ -202,7 +186,7 @@ function renderAuthNotice(isSignedIn) {
     notice = document.createElement('p');
     notice.id = 'requests-auth-notice';
     notice.className = 'requests-auth-notice';
-    notice.textContent = 'Your request list is private to your signed-in account. ';
+    notice.textContent = 'Learning requests require an account. ';
     const link = document.createElement('a');
     link.href = 'login.html';
     link.textContent = 'Sign in';
@@ -210,13 +194,15 @@ function renderAuthNotice(isSignedIn) {
     document.querySelector('.request-controls .container')?.append(notice);
 }
 
-function showFileProtocolBanner() {
-    if (document.getElementById('file-protocol-banner')) return;
-    const banner = document.createElement('div');
-    banner.id = 'file-protocol-banner';
-    banner.setAttribute('role', 'status');
-    banner.textContent = 'For JSON data, use a local server such as VS Code Live Server.';
-    banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;padding:12px 20px;background:#1e40af;color:#fff;text-align:center;font:14px Inter,sans-serif;';
-    document.body.prepend(banner);
-    document.body.style.paddingTop = '44px';
+function renderTableError(message) {
+    const tbody = document.querySelector('.request-table tbody');
+    if (!tbody) return;
+    tbody.textContent = '';
+    const row = document.createElement('tr');
+    const cell = document.createElement('td');
+    cell.colSpan = 5;
+    cell.className = 'request-empty-cell';
+    cell.textContent = `Unable to load requests: ${message}`;
+    row.append(cell);
+    tbody.append(row);
 }

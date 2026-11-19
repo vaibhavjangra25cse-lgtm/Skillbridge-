@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="signup.css">
+    <script src="js/api.js" defer></script>
     <script src="js/storage.js" defer></script>
     <script src="js/signup.js" defer></script>
 </head>
@@ -70,6 +71,14 @@
                     <div class="form-group">
                         <label class="form-label" for="signup-email">College Email</label>
                         <input type="email" id="signup-email" class="form-input" placeholder="you@college.edu" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="signup-role">Account Type</label>
+                        <select id="signup-role" class="form-input" required>
+                            <option value="learner">Learner</option>
+                            <option value="mentor">Mentor</option>
+                        </select>
                     </div>
 
                     <!-- Department -->

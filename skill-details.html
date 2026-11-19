@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="skill-details.css">
+    <script src="js/api.js" defer></script>
     <script src="js/storage.js" defer></script>
     <script src="js/skill-details.js" defer></script>
 </head>
@@ -172,8 +173,8 @@
 
                         <form id="skill-request-form">
                             <label for="request-mentor">Choose a mentor</label>
-                            <select class="sidebar-mentor-select" id="request-mentor" required>
-                                <option value="">Loading mentors...</option>
+                            <select class="sidebar-mentor-select" id="request-mentor">
+                                <option value="">No preference (any available mentor)</option>
                             </select>
                             <label for="request-description">What would you like to learn?</label>
                             <textarea id="request-description" class="sidebar-textarea" placeholder="Hi! I'd love to learn Python. I can offer my skills in exchange..." required></textarea>

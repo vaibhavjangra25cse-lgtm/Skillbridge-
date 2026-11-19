@@ -1,7 +1,7 @@
 /**
  * SkillBridge - Login Page Logic
  * Dedicated JavaScript file for login.html
- * Fetches data strictly from data/login.json
+ * Loads page copy from data/login.json and authenticates through the API.
  *
  * NOTE: Dynamic data loading requires an HTTP server.
  * Open via VS Code Live Server or any local server — do NOT use file:// directly.
@@ -97,28 +97,8 @@ function setupLoginFormValidation() {
     const submitButton = document.querySelector('.login-card .form-btn');
     const emailInput = document.getElementById('login-email');
     const passwordInput = document.getElementById('login-password');
-    const demoButton = document.getElementById('use-demo-account');
 
     if (!form || !submitButton || !emailInput || !passwordInput) return;
-
-    if (demoButton) {
-        demoButton.addEventListener('click', async () => {
-            demoButton.disabled = true;
-            clearMessages();
-            try {
-                await sbInitializeDemoData();
-                emailInput.value = SB_DEMO_ACCOUNT.email;
-                passwordInput.value = SB_DEMO_ACCOUNT.password;
-                showFeedback('Demo credentials are ready. Select Sign In to continue.', 'success');
-                submitButton.focus();
-            } catch (error) {
-                console.error('Unable to prepare the demo account:', error);
-                showFeedback(error.message || 'Unable to prepare the demo account. Please try again.', 'error');
-            } finally {
-                demoButton.disabled = false;
-            }
-        });
-    }
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -148,9 +128,6 @@ function setupLoginFormValidation() {
 
         submitButton.disabled = true;
         try {
-            if (email.toLowerCase() === SB_DEMO_ACCOUNT.email) {
-                await sbInitializeDemoData();
-            }
             const result = await sbLogin(email, password);
             if (!result.ok) {
                 showFeedback(result.error, 'error');

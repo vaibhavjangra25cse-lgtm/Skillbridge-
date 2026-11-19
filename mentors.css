@@ -637,6 +637,21 @@ img {
     font-size: 0.9rem;
 }
 
+.mentor-profile-form {
+    margin: 18px 0;
+}
+
+.mentor-profile-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.mentor-profile-actions p {
+    color: #64748b;
+}
+
 .mentor-request-filter {
     display: flex;
     align-items: center;

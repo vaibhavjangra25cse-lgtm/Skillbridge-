@@ -1,7 +1,7 @@
 /**
  * SkillBridge - Feedback Page Logic
  * Dedicated JavaScript file for feedback.html
- * Fetches data strictly from data/feedback.json (or ../data/feedback.json)
+ * Loads form copy from data/feedback.json and stores submissions through the API.
  *
  * NOTE: Dynamic data loading requires an HTTP server.
  * Open via VS Code Live Server or any local server — do NOT use file:// directly.
@@ -10,7 +10,8 @@
 let feedbackConfig = null;
 let isSubmitting = false;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await sbAuthReady;
     // Setup form event listeners immediately so validation and preventDefault are active
     setupFormInteractions();
     const user = sbGetCurrentUser();
@@ -318,22 +319,19 @@ function validateFeedbackForm() {
 
     // 1. Full Name (Required)
     const nameInput = document.getElementById('feedback-name');
-    if (!nameInput || !nameInput.value.trim()) {
-        setFieldError('name', messages.nameRequired || 'Please enter your full name.');
+    const nameValue = nameInput ? nameInput.value.trim() : '';
+    if (nameValue.length < 2 || nameValue.length > 100) {
+        setFieldError('name', messages.nameRequired || 'Please enter a name between 2 and 100 characters.');
         isValid = false;
         if (!firstInvalidElement) firstInvalidElement = nameInput;
     }
 
-    // 2. Email Address (Required + validation)
+    // 2. Email Address (Optional + validation when provided)
     const emailInput = document.getElementById('feedback-email');
     const emailVal = emailInput ? emailInput.value.trim() : '';
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailVal) {
-        setFieldError('email', messages.emailRequired || 'Please enter your email address.');
-        isValid = false;
-        if (!firstInvalidElement) firstInvalidElement = emailInput;
-    } else if (!emailRegex.test(emailVal)) {
+    if (emailVal && (emailVal.length > 254 || !emailRegex.test(emailVal))) {
         setFieldError('email', messages.emailInvalid || 'Please enter a valid email address (e.g. name@college.edu).');
         isValid = false;
         if (!firstInvalidElement) firstInvalidElement = emailInput;
@@ -359,8 +357,8 @@ function validateFeedbackForm() {
 
     // 6. What should we improve? (Required)
     const improveInput = document.getElementById('feedback-improve');
-    if (!improveInput || !improveInput.value.trim()) {
-        setFieldError('improve', messages.improveRequired || 'Please share what we should improve.');
+    if (!improveInput || improveInput.value.trim().length < 5 || improveInput.value.trim().length > 2000) {
+        setFieldError('improve', messages.improveRequired || 'Please share what we should improve (5 to 2000 characters).');
         isValid = false;
         if (!firstInvalidElement) firstInvalidElement = improveInput;
     }
@@ -390,7 +388,6 @@ async function handleFormSubmit(e) {
         return;
     }
 
-    // Saving is local to this browser; no backend request is made.
     isSubmitting = true;
     const submitBtn = document.getElementById('btn-submit-feedback');
     const originalBtnText = submitBtn ? submitBtn.textContent : 'Submit Feedback';
@@ -416,16 +413,20 @@ async function handleFormSubmit(e) {
             comments: document.getElementById('feedback-comments').value.trim(),
             recommendation: document.querySelector('input[name="recommendation"]:checked')?.value || '',
         };
-        sbSaveFeedback(entry);
+        entry.message = [entry.improvement, entry.liked, entry.comments].filter(Boolean).join('\n\n');
+        if (entry.message.length > 4000) {
+            throw new Error('Please keep your combined feedback under 4000 characters.');
+        }
+        await sbApi('/feedback', { method: 'POST', body: entry });
         document.getElementById('feedback-form').reset();
         clearAllErrors();
         document.querySelectorAll('.recommend-option').forEach(option => option.classList.remove('selected'));
         const ratingDescription = document.getElementById('rating-desc');
         if (ratingDescription) ratingDescription.textContent = 'Select a rating';
         showAlert(
-            'demo-success',
-            'Feedback saved',
-            'Your feedback was saved in this browser. It has not been sent to a backend or shared across devices.'
+            'success',
+            'Feedback submitted',
+            'Thank you. Your feedback was saved successfully.'
         );
 
         // Scroll to top of the card smoothly
@@ -491,8 +492,8 @@ function showAlert(type, title, message) {
     icon.className = 'feedback-icon';
     if (type === 'error') {
         icon.textContent = '⚠️';
-    } else if (type === 'demo-success') {
-        icon.textContent = 'ℹ️';
+    } else if (type === 'success') {
+        icon.textContent = '✓';
     } else {
         icon.textContent = 'ℹ️';
     }

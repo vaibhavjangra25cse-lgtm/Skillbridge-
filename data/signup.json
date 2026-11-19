@@ -28,6 +28,16 @@
         "required": true
       },
       {
+        "id": "signup-role",
+        "label": "Account Type",
+        "defaultOption": "Select account type",
+        "options": [
+          "Learner",
+          "Mentor"
+        ],
+        "required": true
+      },
+      {
         "id": "signup-department",
         "label": "Department",
         "defaultOption": "Select your department",
@@ -73,7 +83,7 @@
     "submitButton": {
       "text": "Create Account"
     },
-    "terms": "This frontend demo saves your account in this browser only. Do not reuse a sensitive password.",
+    "terms": "Your account is stored securely in the SkillBridge database.",
     "footer": {
       "prompt": "Already have an account?",
       "linkText": "Sign In →",

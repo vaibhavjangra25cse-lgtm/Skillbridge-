@@ -387,6 +387,14 @@ img {
     margin-bottom: 8px;
 }
 
+.home-skill-link {
+    color: inherit;
+}
+
+.home-skill-link:hover {
+    color: var(--primary-color, #5b4cdb);
+}
+
 .skill-card-desc {
     font-size: 13px;
     color: #636e72;

@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="mentors.css">
+    <script src="js/api.js" defer></script>
     <script src="js/storage.js" defer></script>
     <script src="js/mentors.js" defer></script>
 </head>
@@ -113,12 +114,40 @@
             <div class="container">
                 <div class="section-heading">
                     <h2 id="mentor-requests-title">Incoming Learning Requests</h2>
-                    <p>Select a mentor to view only requests assigned to that mentor. This is a frontend demonstration, not an access-control boundary.</p>
+                    <p>Update your public teaching profile and manage requests assigned to your mentor account.</p>
                 </div>
-                <div class="mentor-request-filter">
-                    <label for="active-mentor">Mentor view</label>
-                    <select id="active-mentor" class="filter-select"></select>
-                </div>
+                <form id="mentor-profile-form" class="search-panel mentor-profile-form">
+                    <div class="filter-row">
+                        <div class="filter-field">
+                            <label for="mentor-profile-teaches">Skills you teach</label>
+                            <input id="mentor-profile-teaches" class="filter-select" maxlength="500">
+                        </div>
+                        <div class="filter-field">
+                            <label for="mentor-profile-expertise">Expertise (comma-separated)</label>
+                            <input id="mentor-profile-expertise" class="filter-select" maxlength="500">
+                        </div>
+                        <div class="filter-field">
+                            <label for="mentor-profile-experience">Experience</label>
+                            <input id="mentor-profile-experience" class="filter-select" maxlength="100">
+                        </div>
+                        <div class="filter-field">
+                            <label for="mentor-profile-availability">Availability</label>
+                            <input id="mentor-profile-availability" class="filter-select" maxlength="500">
+                        </div>
+                        <div class="filter-field">
+                            <label for="mentor-profile-wants">Skills you want to learn</label>
+                            <input id="mentor-profile-wants" class="filter-select" maxlength="500">
+                        </div>
+                        <div class="filter-field">
+                            <label for="mentor-profile-bio">About you</label>
+                            <textarea id="mentor-profile-bio" class="filter-select" maxlength="2000" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="mentor-profile-actions">
+                        <button type="submit" class="filter-button">Save Profile</button>
+                        <p id="mentor-profile-status" aria-live="polite"></p>
+                    </div>
+                </form>
                 <div id="mentor-request-list" class="mentor-request-list" aria-live="polite"></div>
             </div>
         </section>

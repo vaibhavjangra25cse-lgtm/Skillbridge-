@@ -1,7 +1,7 @@
 /**
  * SkillBridge - Sign Up Page Logic
  * Dedicated JavaScript file for signup.html
- * Fetches data strictly from data/signup.json
+ * Loads page copy from data/signup.json and submits accounts to the API.
  *
  * NOTE: Dynamic data loading requires an HTTP server.
  * Open via VS Code Live Server or any local server — do NOT use file:// directly.
@@ -97,9 +97,7 @@ function applySignupConfig(data) {
 
     // Terms
     const termsEl = document.querySelector('.signup-terms');
-    if (termsEl && cardData.terms) {
-        termsEl.textContent = cardData.terms;
-    }
+    if (termsEl && cardData.terms) termsEl.textContent = cardData.terms;
 
     // Footer
     const footerNote = document.querySelector('.signup-footer-note');
@@ -122,6 +120,7 @@ function setupSignupFormValidation() {
     const firstName = document.getElementById('signup-firstname');
     const lastName = document.getElementById('signup-lastname');
     const email = document.getElementById('signup-email');
+    const role = document.getElementById('signup-role');
     const dept = document.getElementById('signup-department');
     const year = document.getElementById('signup-year');
     const password = document.getElementById('signup-password');
@@ -171,8 +170,13 @@ function setupSignupFormValidation() {
                 password.focus();
                 return;
             }
-            if (password.value.length < 6) {
-                showFeedback('Password must be at least 6 characters long.', 'error');
+            if (password.value.length < 8) {
+                showFeedback('Password must be at least 8 characters long.', 'error');
+                password.focus();
+                return;
+            }
+            if (new TextEncoder().encode(password.value).length > 72) {
+                showFeedback('Password must not exceed 72 UTF-8 bytes.', 'error');
                 password.focus();
                 return;
             }
@@ -197,6 +201,7 @@ function setupSignupFormValidation() {
                 firstName: firstName.value.trim(),
                 lastName: lastName.value.trim(),
                 email: emailVal,
+                role: role.value.toLowerCase(),
                 department: dept.value,
                 year: year.value,
                 password: password.value,
@@ -205,9 +210,9 @@ function setupSignupFormValidation() {
                 showFeedback(result.error, 'error');
                 return;
             }
-            showFeedback('Account created. Sign in with your email and password to continue.', 'success');
+            showFeedback('Account created successfully. Redirecting...', 'success');
             window.setTimeout(() => {
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
             }, 500);
         } catch (error) {
             console.error('Unable to create account:', error);

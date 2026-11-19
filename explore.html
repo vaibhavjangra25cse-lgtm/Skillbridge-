@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="explore.css">
+    <script src="js/api.js" defer></script>
     <script src="js/storage.js" defer></script>
     <script src="js/explore.js" defer></script>
 </head>
@@ -60,6 +61,16 @@
                         <input type="text" class="search-input" placeholder="Search for a skill...">
                     </label>
                 </div>
+                <label class="skill-level-filter" for="skill-level-filter">
+                    Difficulty
+                    <select id="skill-level-filter" class="filter-select">
+                        <option value="">All levels</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="All Levels">All Levels</option>
+                    </select>
+                </label>
 
                 <div class="filter-pills" aria-label="Skill categories">
                     <button type="button" class="filter-pill active">All</button>

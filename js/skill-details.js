@@ -1,18 +1,13 @@
 /**
  * SkillBridge - Skill Details Logic
  * Dedicated JavaScript file for skill-details.html
- * Fetches data strictly from data/skill-details.json
+ * Loads skill details and matching mentor profiles from the Express API.
  *
  * NOTE: Dynamic data loading requires an HTTP server.
  * Open via VS Code Live Server or any local server — do NOT use file:// directly.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.protocol === 'file:') {
-        showFileProtocolBanner();
-        setupFormInteraction();
-        return;
-    }
     loadSkillDetails();
 });
 
@@ -23,32 +18,46 @@ async function loadSkillDetails() {
     }
 
     try {
-        const response = await fetch('data/skill-details.json');
-        if (!response.ok) {
-            throw new Error(`Failed to load skill details: ${response.status} ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        const skill = data.skill;
-
-        if (!skill) {
-            throw new Error('Skill detail record not found.');
-        }
-
         const params = new URLSearchParams(window.location.search);
-        if (params.get('skill')) skill.title = params.get('skill');
-        if (params.get('category')) skill.category = params.get('category');
-        try {
-            await sbLoadMentors();
-        } catch (mentorError) {
-            console.error('Unable to load mentor directory for request assignment:', mentorError);
-        }
+        const { skill: record } = await sbApi(`/skills/${encodeURIComponent(params.get('skillId') || '1')}`);
+        const mentors = await sbLoadMentors();
+        const details = record.details || {};
+        const availableMentors = mentors.filter(mentor => mentorMatchesSkill(mentor, record));
+        const instructor = availableMentors.find(mentor => mentor.name === record.teacher)
+            || availableMentors[0];
+        const skill = {
+            ...details,
+            ...record,
+            title: record.title,
+            category: record.category,
+            about: details.about || { title: 'About This Skill', paragraphs: [record.description] },
+            whatYoullLearn: details.whatYoullLearn || record.resources || [],
+            availableMentors,
+            instructor: instructor
+                ? {
+                    name: instructor.name,
+                    details: [instructor.department, instructor.year, instructor.experience]
+                        .filter(Boolean)
+                        .join(' · '),
+                    avatarText: instructor.avatar?.text || instructor.name.slice(0, 2).toUpperCase(),
+                }
+                : null,
+            sidebar: {
+                info: [
+                    { label: 'Category', value: record.category },
+                    { label: 'Difficulty', value: record.level || 'All Levels' },
+                    { label: 'Available Mentors', value: String(availableMentors.length) },
+                ],
+                placeholder: 'Describe what you would like to learn...',
+            },
+        };
 
         renderHeader(skill);
         renderAbout(skill.about);
         renderChecklist(skill.whatYoullLearn);
         renderMentors(skill.availableMentors);
         renderSidebar(skill.sidebar);
+        renderWantedSwap(skill.availableMentors);
         setupFormInteraction(skill);
 
     } catch (error) {
@@ -59,6 +68,15 @@ async function loadSkillDetails() {
             mainLayout.removeAttribute('aria-busy');
         }
     }
+}
+
+function mentorMatchesSkill(mentor, skill) {
+    const skillTerms = [skill.title, skill.category]
+        .filter(Boolean)
+        .flatMap(value => value.toLowerCase().split(/[^a-z0-9]+/))
+        .filter(value => value.length > 2);
+    const mentorSkills = `${(mentor.expertise || []).join(' ')} ${mentor.teaches || ''}`.toLowerCase();
+    return skillTerms.some(term => mentorSkills.includes(term));
 }
 
 function renderHeader(skill) {
@@ -73,10 +91,16 @@ function renderHeader(skill) {
     if (titleEl && skill.title) titleEl.textContent = skill.title;
     if (breadcrumbCurrent && skill.title) breadcrumbCurrent.textContent = skill.title;
 
-    if (skill.instructor) {
-        if (instructorName) instructorName.textContent = skill.instructor.name;
-        if (instructorDetails) instructorDetails.textContent = ` · ${skill.instructor.details}`;
-        if (avatar && skill.instructor.avatarText) avatar.textContent = skill.instructor.avatarText;
+    if (instructorName) instructorName.textContent = skill.instructor?.name || 'Community mentors';
+    if (instructorDetails) instructorDetails.textContent = skill.instructor?.details
+        ? ` · ${skill.instructor.details}`
+        : '';
+    if (avatar) avatar.textContent = skill.instructor?.avatarText || '';
+
+    const image = document.querySelector('.detail-main-image');
+    if (image) {
+        image.src = skill.image || 'images/learning-placeholder.svg';
+        image.alt = skill.alt || skill.title || 'Skill learning session';
     }
 }
 
@@ -154,8 +178,8 @@ function renderMentors(mentors) {
         card.className = 'mentor-card';
 
         const avatar = document.createElement('div');
-        avatar.className = mentor.avatarClass || 'mentor-avatar-placeholder blue';
-        avatar.textContent = mentor.avatarText || mentor.name.slice(0, 2).toUpperCase();
+        avatar.className = mentor.avatar?.className || 'mentor-avatar-placeholder blue';
+        avatar.textContent = mentor.avatar?.text || mentor.name.slice(0, 2).toUpperCase();
 
         const info = document.createElement('div');
         info.className = 'mentor-info';
@@ -226,6 +250,20 @@ function renderSidebar(sidebar) {
     }
 }
 
+function renderWantedSwap(mentors) {
+    const callout = document.querySelector('.wanted-swap');
+    if (!callout) return;
+    const mentor = mentors.find(item => item.wantsToLearn);
+    if (!mentor) {
+        callout.hidden = true;
+        return;
+    }
+    const paragraph = callout.querySelector('p');
+    if (paragraph) {
+        paragraph.textContent = `${mentor.name} is looking to learn ${mentor.wantsToLearn}. Visit Find Mentors to view the public mentor directory.`;
+    }
+}
+
 function setupFormInteraction(skill = null) {
     const form = document.getElementById('skill-request-form');
     const textarea = document.querySelector('.sidebar-textarea');
@@ -244,7 +282,7 @@ function setupFormInteraction(skill = null) {
     mentorSelect.textContent = '';
     const placeholder = document.createElement('option');
     placeholder.value = '';
-    placeholder.textContent = 'Select a mentor';
+    placeholder.textContent = 'No preference (any available mentor)';
     mentorSelect.append(placeholder);
     mentors.forEach(mentor => {
         const option = document.createElement('option');
@@ -256,24 +294,14 @@ function setupFormInteraction(skill = null) {
         mentorSelect.append(option);
     });
 
-    form.addEventListener('submit', event => {
+    form.addEventListener('submit', async event => {
         event.preventDefault();
-        if (!sbGetCurrentUser()) {
-            window.alert('Please sign in before submitting a learning request.');
-            window.location.href = 'login.html';
-            return;
-        }
 
         const value = textarea.value.trim();
         const selectedOption = mentorSelect.selectedOptions[0];
-        if (!selectedOption || !selectedOption.dataset.mentorName) {
-            mentorSelect.focus();
-            if (note) note.textContent = 'Please choose a mentor for this request.';
-            return;
-        }
-        if (!value) {
+        if (value.length < 5) {
             textarea.focus();
-            if (note) note.textContent = 'Please describe what you would like to learn.';
+            if (note) note.textContent = 'Please describe what you would like to learn in at least 5 characters.';
             return;
         }
         if (button.disabled) return;
@@ -281,22 +309,22 @@ function setupFormInteraction(skill = null) {
         button.disabled = true;
         const params = new URLSearchParams(window.location.search);
         try {
-            const result = sbCreateRequest({
+            const result = await sbCreateRequest({
                 skillId: params.get('skillId'),
                 skillName: document.querySelector('.detail-title')?.textContent.trim() || 'Skill',
                 description: value,
                 mentorId: selectedOption.value || null,
-                mentorName: selectedOption.dataset.mentorName,
+                mentorName: selectedOption.dataset.mentorName || '',
             });
             if (!result.ok) {
                 button.disabled = false;
-                if (note) note.textContent = result.error;
+                if (!result.cancelled && note) note.textContent = result.error;
                 return;
             }
 
             form.reset();
             button.textContent = 'Request Sent ✓';
-            if (note) note.textContent = 'Your request was saved in this browser. You can track its status on the Requests page.';
+            if (note) note.textContent = 'Your request was saved. You can track its status on the Requests page.';
         } catch (error) {
             button.disabled = false;
             console.error('Unable to save learning request:', error);
@@ -308,6 +336,9 @@ function setupFormInteraction(skill = null) {
 function renderErrorState(errorMessage) {
     const main = document.querySelector('.detail-main');
     if (!main) return;
+    main.textContent = '';
+    const sidebar = document.querySelector('.detail-layout aside');
+    if (sidebar) sidebar.textContent = '';
 
     const errorDiv = document.createElement('div');
     errorDiv.className = 'error-state';
@@ -317,7 +348,7 @@ function renderErrorState(errorMessage) {
     errorDiv.style.borderRadius = '8px';
     errorDiv.style.margin = '1.5rem 0';
     errorDiv.textContent = `Unable to load skill details: ${errorMessage}`;
-    main.prepend(errorDiv);
+    main.append(errorDiv);
 }
 
 /**

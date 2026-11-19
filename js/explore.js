@@ -1,25 +1,21 @@
 /**
  * SkillBridge - Explore Skills Logic
  * Dedicated JavaScript file for explore.html
- * Fetches data strictly from data/explore.json
+ * Loads skill records and filters from the Express API.
  *
  * NOTE: Dynamic data loading requires an HTTP server.
  * Open via VS Code Live Server or any local server — do NOT use file:// directly.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.protocol === 'file:') {
-        showFileProtocolBanner();
-        // Keep existing static HTML cards visible — do not replace them with an error
-        setupExploreInteractions();
-        return;
-    }
     loadExploreData();
 });
 
 let allSkills = [];
 let activeCategory = 'All';
 let searchQuery = '';
+let activeLevel = '';
+let searchTimer = null;
 
 async function loadExploreData() {
     const grid = document.querySelector('.skill-grid');
@@ -28,27 +24,9 @@ async function loadExploreData() {
     }
 
     try {
-        const response = await fetch('data/explore.json');
-        if (!response.ok) {
-            throw new Error(`Failed to load explore data: ${response.status} ${response.statusText}`);
-        }
+        const result = await sbApi('/explore/skills?limit=50');
 
-        const data = await response.json();
-        try {
-            await sbLoadMentors();
-        } catch (mentorError) {
-            console.error('Unable to load mentors for request assignment:', mentorError);
-        }
-
-        // Update header if present
-        if (data.pageHeader) {
-            const pageTitle = document.querySelector('.page-title');
-            const pageSubtitle = document.querySelector('.page-subtitle');
-            if (pageTitle && data.pageHeader.title) pageTitle.textContent = data.pageHeader.title;
-            if (pageSubtitle && data.pageHeader.subtitle) pageSubtitle.textContent = data.pageHeader.subtitle;
-        }
-
-        allSkills = Array.isArray(data.skills) ? data.skills : [];
+        allSkills = result.skills;
 
         // Setup filter pills and search event listeners
         setupExploreInteractions();
@@ -72,9 +50,14 @@ function setupExploreInteractions() {
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             searchQuery = e.target.value.trim().toLowerCase();
-            renderSkillCards(filterSkills());
+            scheduleSkillSearch();
         });
     }
+    const levelFilter = document.getElementById('skill-level-filter');
+    if (levelFilter) levelFilter.addEventListener('change', () => {
+        activeLevel = levelFilter.value;
+        scheduleSkillSearch();
+    });
 
     // Filter pills
     const pills = document.querySelectorAll('.filter-pills .filter-pill');
@@ -83,23 +66,35 @@ function setupExploreInteractions() {
             pills.forEach(p => p.classList.remove('active'));
             pill.classList.add('active');
             activeCategory = pill.textContent.trim();
-            renderSkillCards(filterSkills());
+            scheduleSkillSearch();
         });
     });
 }
 
+function scheduleSkillSearch() {
+    window.clearTimeout(searchTimer);
+    searchTimer = window.setTimeout(async () => {
+        const query = new URLSearchParams({ limit: '50' });
+        if (searchQuery) query.set('search', searchQuery);
+        if (activeCategory !== 'All') query.set('category', activeCategory);
+        if (activeLevel) query.set('level', activeLevel);
+        const grid = document.querySelector('.skill-grid');
+        if (grid) grid.setAttribute('aria-busy', 'true');
+        try {
+            const result = await sbApi(`/explore/skills?${query}`);
+            allSkills = result.skills;
+            renderSkillCards(allSkills);
+        } catch (error) {
+            console.error('Unable to filter skills:', error);
+            renderErrorState(error.message);
+        } finally {
+            if (grid) grid.removeAttribute('aria-busy');
+        }
+    }, 200);
+}
+
 function filterSkills() {
-    return allSkills.filter(skill => {
-        const matchesCategory = (activeCategory === 'All') ||
-            (skill.category && skill.category.toLowerCase() === activeCategory.toLowerCase());
-
-        const matchesSearch = !searchQuery ||
-            (skill.title && skill.title.toLowerCase().includes(searchQuery)) ||
-            (skill.description && skill.description.toLowerCase().includes(searchQuery)) ||
-            (skill.teacher && skill.teacher.toLowerCase().includes(searchQuery));
-
-        return matchesCategory && matchesSearch;
-    });
+    return allSkills;
 }
 
 function renderSkillCards(skills) {
@@ -138,7 +133,7 @@ function renderSkillCards(skills) {
 
         const difficultyBadge = document.createElement('span');
         difficultyBadge.className = 'difficulty-badge';
-        difficultyBadge.textContent = skill.difficulty || 'All Levels';
+        difficultyBadge.textContent = skill.level || skill.difficulty || 'All Levels';
 
         meta.append(categoryBadge, difficultyBadge);
 
@@ -178,13 +173,7 @@ function renderSkillCards(skills) {
         requestButton.type = 'button';
         requestButton.className = 'card-link request-skill-button';
         requestButton.textContent = 'Request to Learn';
-        requestButton.addEventListener('click', () => {
-            if (!sbGetCurrentUser()) {
-                window.alert('Please sign in before submitting a learning request.');
-                window.location.href = 'login.html';
-                return;
-            }
-
+        requestButton.addEventListener('click', async () => {
             const description = window.prompt(`What would you like to learn about ${skill.title}?`);
             if (description === null) return;
             if (!description.trim()) {
@@ -194,14 +183,17 @@ function renderSkillCards(skills) {
 
             requestButton.disabled = true;
             try {
-                const result = sbCreateRequest({
+                const result = await sbCreateRequest({
                     skillId: skill.id,
-                    skillName: skill.title,
                     description,
                     mentorName: skill.teacher || '',
                 });
                 if (!result.ok) {
                     requestButton.disabled = false;
+                    if (result.error.includes('sign in')) {
+                        if (window.confirm(`${result.error} Go to Sign In now?`)) window.location.href = 'login.html';
+                        return;
+                    }
                     window.alert(result.error);
                     return;
                 }

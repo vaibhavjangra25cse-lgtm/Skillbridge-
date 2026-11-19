@@ -13,7 +13,7 @@
       "email": {
         "label": "Email Address",
         "placeholder": "you@college.edu",
-        "required": true
+        "required": false
       },
       "category": {
         "label": "Feedback Category",
@@ -72,11 +72,11 @@
     },
     "messages": {
       "validationError": "Please correct the errors in the form before submitting.",
-      "demoNoticeTitle": "Frontend Demonstration Only",
-      "demoNoticeBody": "Form validation passed! SkillBridge currently runs as a frontend static application with no backend server or database connected. Your feedback was validated successfully on the client side, but has not been sent or stored anywhere.",
+      "demoNoticeTitle": "Feedback submitted",
+      "demoNoticeBody": "Your feedback was saved successfully.",
       "resetConfirm": "Form fields have been reset to their default state.",
       "errors": {
-        "nameRequired": "Please enter your full name.",
+        "nameRequired": "Please enter a name between 2 and 100 characters.",
         "emailRequired": "Please enter your email address.",
         "emailInvalid": "Please enter a valid email address.",
         "categoryRequired": "Please select a feedback category.",
@@ -86,4 +86,3 @@
     }
   }
 }
-

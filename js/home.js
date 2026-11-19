@@ -1,83 +1,55 @@
 /**
  * SkillBridge - Home Page Logic
  * Dedicated JavaScript file for index.html
- * Fetches data strictly from data/home.json
+ * Loads featured skills and activity from the Express API.
  *
  * NOTE: Dynamic data loading requires an HTTP server.
  * Open via VS Code Live Server or any local server — do NOT use file:// directly.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    updateRequestDashboard();
-    updateMentorCount();
-    sbOnStorageChange(key => {
-        if (key === SB_KEYS.REQUESTS) updateRequestDashboard();
-        if (key === SB_KEYS.MENTORS) updateMentorCount();
-    });
+    sbAuthReady.then(updateRequestDashboard);
     sbOnPageActive(updateRequestDashboard);
-    if (window.location.protocol === 'file:') {
-        showFileProtocolBanner();
-        // Keep existing static HTML content visible
-        return;
-    }
-    sbLoadMentors().then(updateMentorCount).catch(error => {
-        console.error('Unable to load mentor count for the dashboard:', error);
-    });
     loadHomeData();
 });
 
-function updateRequestDashboard() {
-    const counts = sbGetRequestCounts();
-    document.querySelectorAll('[data-request-count]').forEach(counter => {
-        const key = counter.dataset.requestCount;
-        counter.textContent = String(counts[key] || 0);
-    });
+async function updateRequestDashboard() {
+    try {
+        const requests = sbGetCurrentUser()
+            ? await sbGetRequests('/requests/my')
+            : [];
+        const counts = sbGetRequestCounts(requests);
+        document.querySelectorAll('[data-request-count]').forEach(counter => {
+            const key = counter.dataset.requestCount;
+            counter.textContent = String(counts[key] || 0);
+        });
+    } catch (error) {
+        console.error('Unable to load request counts for the dashboard:', error);
+    }
 }
 
-function updateMentorCount() {
+function updateMentorCount(count) {
     const counter = document.querySelector('[data-mentor-count]');
-    if (counter) counter.textContent = String(sbGetMentors().length);
+    if (counter) counter.textContent = String(count);
 }
 
 async function loadHomeData() {
     const skillGrid = document.querySelector('.skill-grid');
-    const heroTitle = document.querySelector('.hero-title');
-    const heroDesc = document.querySelector('.hero-description');
-
     // Show initial loading state if skill grid is present
     if (skillGrid) {
         skillGrid.setAttribute('aria-busy', 'true');
     }
 
     try {
-        const response = await fetch('data/home.json');
-        if (!response.ok) {
-            throw new Error(`Failed to load home data: ${response.status} ${response.statusText}`);
-        }
-
-        const data = await response.json();
-
-        // Render Hero Content if needed
-        if (data.hero) {
-            renderHero(data.hero);
-        }
+        const home = await sbApi('/home');
 
         // Render Popular Skills
-        if (data.popularSkills && data.popularSkills.skills) {
-            renderPopularSkills(data.popularSkills.skills);
+        if (Array.isArray(home.featuredSkills)) {
+            renderPopularSkills(home.featuredSkills);
         } else {
             renderEmptySkillsState();
         }
-
-        // Render How It Works
-        if (data.howItWorks && data.howItWorks.steps) {
-            renderHowItWorks(data.howItWorks.steps);
-        }
-
-        // Render Benefits
-        if (data.benefits && data.benefits.items) {
-            renderBenefits(data.benefits.items);
-        }
+        updateMentorCount(home.statistics.mentors);
 
     } catch (error) {
         console.error('Error loading home page data:', error);
@@ -150,13 +122,17 @@ function renderPopularSkills(skills) {
 
         const difficultyBadge = document.createElement('span');
         difficultyBadge.className = 'difficulty-badge';
-        difficultyBadge.textContent = skill.difficulty || 'All Levels';
+        difficultyBadge.textContent = skill.level || 'All Levels';
 
         meta.append(categoryBadge, difficultyBadge);
 
         const title = document.createElement('h3');
         title.className = 'skill-card-title';
-        title.textContent = skill.title || '';
+        const detailLink = document.createElement('a');
+        detailLink.href = `skill-details.html?skillId=${encodeURIComponent(skill.id)}`;
+        detailLink.className = 'home-skill-link';
+        detailLink.textContent = skill.title || '';
+        title.append(detailLink);
 
         const desc = document.createElement('p');
         desc.className = 'skill-card-desc';
@@ -278,10 +254,8 @@ function renderErrorState(errorMessage) {
     p.textContent = `Unable to load content: ${errorMessage}. Please try refreshing the page.`;
     errorBox.append(p);
 
-    // Keep existing content if present, or show error message
-    if (skillGrid.children.length === 0) {
-        skillGrid.append(errorBox);
-    }
+    skillGrid.textContent = '';
+    skillGrid.append(errorBox);
 }
 
 /**
